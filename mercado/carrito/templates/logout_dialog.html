@@ -1,0 +1,11 @@
+{% extends 'account.html'%}
+{% block dialog %}
+<dialog id="logout_dialog">
+    <h1> cuenta cerrada con exito</h1>
+    <a href="{% url 'tienda' %}">volver a inicio</a>
+</dialog>
+<script>
+    var dialog = document.getElementById("logout_dialog");
+    dialog.showModal();
+</script>
+{% endblock %}

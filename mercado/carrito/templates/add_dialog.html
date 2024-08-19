@@ -1,0 +1,15 @@
+{% extends 'admin_manager.html'%}
+{% block dialog %}
+<dialog id="delete_dialog">
+    <a href="{% url 'dialgo_back' %}">X</a>
+    <form method="POST">
+        {% csrf_token %}
+        {{ add_form.as_p }}
+        <input type="submit" value="confirm">
+    </form>
+</dialog>
+<script>
+    var dialog = document.getElementById("delete_dialog");
+    dialog.showModal();
+</script>
+{% endblock %}

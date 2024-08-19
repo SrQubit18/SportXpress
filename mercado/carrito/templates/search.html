@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% for producto in posts %}
+    <div class="card_cont">
+        <div class="card">
+            <div class="imegen_producto">
+                {% if producto.stock > 1 %}
+                    <img src="{% static 'img_pro.svg' %}" alt="">
+                {% endif %}
+            </div>
+            <div class="info_cont">
+                <h2>{{ producto.nombre }}</h2>
+                <div class="info">
+                    <p>{{ producto.descripcion }}</p>
+                    <p><strong>${{ producto.precio }}</strong></p>
+
+                    <div class="btn_add_rem">
+                        <button onclick="updateQuantity('{{ producto.id }}', 1)">+</button>
+                        <span id="quantity-{{ producto.id }}">1</span>
+                        <button onclick="updateQuantity('{{ producto.id }}', -1)">-</button>
+                    </div>
+                </div>
+            </div>
+            <div class="boton_comprar">
+                <a href="#" onclick="addToCart('{{ producto.id }}'); return false;">Añadir al carrito</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    <script>
+        // Este objeto almacenará las cantidades seleccionadas por producto
+        const quantities = {};
+
+        function updateQuantity(productId, change) {
+            if (!quantities[productId]) {
+                quantities[productId] = 1; // Iniciar con 1 si no existe
+            }
+
+            // Actualizar la cantidad
+            quantities[productId] += change;
+
+            if (quantities[productId] < 1) {
+                quantities[productId] = 1; // Evitar que baje de 1
+            }
+
+            // Actualizar el texto de la cantidad
+            document.getElementById(`quantity-${productId}`).innerText = quantities[productId];
+        }
+        document.getElementById('cart-count').innerText = 0
+        var ids = [];
+        function addToCart(productId) {
+            const quantity = quantities[productId] || 1;
+        
+            fetch("{% url 'agregar_carrito' 0 %}".replace('0', productId) + '?cantidad=' + quantity, {
+                method: 'GET'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if ( ids.includes(productId)){
+                    console.log("error:product is already in list")
+                } else {
+                    document.getElementById('cart-count').innerText = Number(document.getElementById('cart-count').innerText) + 1 ;
+                    ids.push(productId);
+                    console.log(ids,":",String(productId));
+                };
+            })
+            .catch(error => console.error('Error adding to cart:', error));
+
+        }
+        
+    </script>
+{% endblock %}

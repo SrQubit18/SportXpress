@@ -1,0 +1,1086 @@
+
+body{
+    background-color: white;
+    padding: 0;
+    margin: 0;
+    font-family: "Inter", sans-serif;
+}
+
+/* Estilos del Popup */
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4); /* Fondo oscuro */
+}
+
+.popup-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 10px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#pop {
+    top: -90px;
+    margin-top: 0;
+    padding-top: 0;
+    display: flex;
+    flex-direction: column;
+
+}
+/* LOGO Y BUSQUEDA*/
+header .logo img {
+   width: 80px;
+
+}
+header .logo{
+    display: flex;
+    margin-top: auto;
+    margin-left: 30px;
+    margin-bottom: auto;
+
+ }
+header .buscador > form > button > img {
+    width: 25px;
+    height: 25px;
+}
+header .buscador > form {
+    display: flex;
+}
+header .buscador > form > button {
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+header .buscador > form > input {
+    transition: width .5s ease-in-out;
+    font-size: 17px;
+    color: black;
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    height: 30px;
+    overflow: hidden;
+    width:100px
+}
+header .buscador > form >input:focus {
+    outline: none;
+    border: none;
+}
+
+header .buscador  {
+    position: absolute;
+    transition: all .5s ease-in-out;
+    padding: 15px;
+    background-color: aliceblue;
+    display: flex;
+    border-radius: 45px;
+    height: 25px;
+    width:125px;
+    left: 50%;
+    top: 45px;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+header:hover > .buscador  {
+    width: 600px;
+}
+header:hover > .buscador > form >  input{
+    width:585px;
+}
+header .menu img{
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 30px;
+    height: 30px;
+    
+}
+header .menu h4 a{
+    font-size: 18px;
+    font-weight: 400;
+    margin: 15px;
+    text-decoration: none;
+    color: black;
+    font-family: "Inter", sans-serif;
+}
+header .menu {
+    display: flex;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 25px;
+}
+
+header {
+    position: relative;
+    background-color: rgb(219, 77, 77);
+    justify-content: space-between;
+    display: flex;
+    padding: 10px;
+    height: 75px;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* CATEGORIAS */
+
+.categorias {
+    background-color: rgb(255, 255, 255);
+    position: sticky;
+    top: 0;
+    height: 59px;
+    z-index: 1000;
+}
+
+
+.categorias img {
+    margin-top: 5px;
+    width: 25px;
+    height: 20px;
+}
+.categorias img:hover{
+    scale: 1.1;
+}
+
+.categorias ul {
+    margin-top: 2px;
+    list-style: none;
+    display: inline-flex;
+}
+.categorias li {
+    display: inline-flex;
+}
+.categorias ul li a{
+    font-size: 13px;
+    font-weight: 400;
+    margin-inline-end: 10px;
+    margin-inline-start: 10px;
+    text-decoration: none;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    color: black;
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+
+}
+
+.categorias ul li a:hover{
+    color: rgb(219, 77, 77);
+    scale: 1.1;
+}
+.categorias .box {
+    margin-left: 20px;
+    margin-top: 6px;
+    display: inline-flex;
+    padding: 10px;
+    height: 40px;
+}
+.categorias > .box > * {
+    transition: all 0.5s ease-in-out;
+}
+.categorias > .box > ul > li > a{
+    transition: all 0.25s ease-in-out;
+}
+/* FOOTER */
+ footer {
+    background-color: rgb(219, 77, 77);
+    padding: 70PX 0;
+    
+ }
+
+.footer-container{
+    max-width: 1170px;
+    margin: auto;
+}
+
+.row ul{
+    list-style: none;
+}
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.footer-col{
+    width: 25%;
+    padding: 0 15px;
+}
+
+.footer-col h4{
+    font-family: "Inter", sans-serif;
+    font-size: 18px;
+    text-transform: capitalize;
+    margin-bottom: 30px;
+    font-weight: 500;
+    position: relative;
+}
+.footer-col h4::before{
+    content:'';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    background-color: aqua;
+    height: 2px;
+    box-sizing: border-box;
+    width: 50px;
+}
+
+.footer-col ul li:not(:last-child){
+    margin-bottom: 10px;
+}
+
+.footer-col ul li a{
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    text-transform: capitalize;
+    text-decoration: none;
+    color: white;
+    font-weight: 300;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.footer-col ul li a:hover{
+    color: rgb(0, 0, 0);
+    padding-left: 10px;
+}
+
+.ejm {
+    width: 100%;
+    height: 120px;
+    background-color: blue;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    background-color: black;
+    overflow: hidden;
+
+}
+
+.slider input {
+    visibility: hidden;
+    display: none;
+}
+
+.buttons {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    bottom: 50px;
+    gap: 10px;
+}
+
+.buttons label {
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border-radius: 50px;
+    opacity: 0.5;
+    cursor: pointer;
+    z-index: 1; 
+    transition: 300ms ease-in-out;
+}
+
+.content{
+    position: relative;
+    width: 300vw;
+    display: flex;
+    transition: 400ms ease-in-out;
+    /* overflow: hidden; */
+}
+
+.one_lide, .two_lide, .three_lide {
+    position:relative ;
+    width: 100vw;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.three_lide{
+    background-color: blueviolet;
+}
+
+
+.caruimage1{
+    width: 100%;
+    height: 100%;
+    background-image: url('/static/acampar.jpg');
+    background-size: cover;
+}
+
+.caruimage2{
+    width: 100%;
+    height: 100%;
+    background-image: url('/static/montañismo.jpeg');
+    background-size: cover;
+}
+
+.caruimage3{
+    width: 100%;
+    height: 100%;
+
+    background-image: url('/static/images.jpg');
+    background-size: cover;
+}
+
+/* Animación para el slider */
+@keyframes slider {
+    0% { transform: translateX(0); }
+    33.33% { transform: translateX(0); }
+    33.34% { transform: translateX(-100vw); }
+    66.66% { transform: translateX(-100vw); }
+    66.67% { transform: translateX(-200vw); }
+    100% { transform: translateX(-200vw); }
+}
+.content {
+    animation: slider 15s infinite ease-in-out;
+    display: flex;
+    width: 300vw;
+}
+.content {
+    display: flex;
+    width: 300vw; /* 100vw por cada slide */
+    transition: transform 1s ease-in-out; /* Transición suave entre los cambios */
+}
+
+/* Estilos individuales para cada slide */
+.one_lide, .two_lide, .three_lide {
+    width: 100vw;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Configuración del slider con animación suave */
+#sliderOne:checked ~ .content {
+    transform: translateX(0);
+}
+
+#sliderTwo:checked ~ .content {
+    transform: translateX(-100vw);
+}
+
+#sliderThree:checked ~ .content {
+    transform: translateX(-200vw);
+}
+
+/* Botones de control del slider */
+.buttons label {
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border-radius: 50px;
+    opacity: 0.5;
+    cursor: pointer;
+    z-index: 1;
+    transition: 300ms ease-in-out;
+}
+
+/* Mantener la animación de los botones */
+.buttons label:nth-child(1) {
+    animation: buttons 15s infinite;
+}
+
+.buttons label:nth-child(2) {
+    animation: buttonsTwo 15s infinite;
+}
+
+.buttons label:nth-child(3) {
+    animation: buttonsThree 15s infinite;
+}
+
+/* Keyframes para los botones */
+@keyframes buttons {
+    0%, 33.33% { opacity: 1; }
+    33.34%, 66.66% { opacity: 0.5; }
+    66.67%, 100% { opacity: 0.5; }
+}
+
+@keyframes buttonsTwo {
+    0%, 33.33% { opacity: 0.5; }
+    33.34%, 66.66% { opacity: 1; }
+    66.67%, 100% { opacity: 0.5; }
+}
+
+@keyframes buttonsThree {
+    0%, 66.66% { opacity: 0.5; }
+    66.67%, 100% { opacity: 1; }
+}
+
+
+.content_sliderP{
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center;    /* Centra verticalmente */
+    height: 500px;          /* Altura del contenedor, puedes ajustar */
+    background-color: rgb(231, 231, 231);
+    padding-top: 80px;
+}
+
+.sliderP {
+    scroll-snap-type: x mandatory;
+    width: 90%;
+    max-width: 1200px; /* Ajusta según sea necesario */
+    height: 85%;
+    max-height: 800px; /* Ajusta según sea necesario */
+    background-color: rgb(231, 231, 231);
+    display: flex;
+    gap: 0px;          /* Espacio entre tarjetas */
+    padding: 1px;
+    justify-content: center;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    margin-top: -20px;
+    margin-bottom: 30px;    /* Mantiene las tarjetas en una sola línea horizontal */
+
+}
+
+
+
+.card {
+    width: 150px; /* Ajusta el ancho de las tarjetas */
+    height: 310px;
+    background-color: rgb(255, 255, 255); /* Color de fondo para visibilidad */
+    border-radius: 5px;      /* Bordes redondeados */
+    padding: 15px;
+    display: inline-block; /* Asegura que las tarjetas estén en una línea horizontal */
+    flex-direction: column;
+    justify-content: space-between;
+    color: black; /* Color del texto */
+    vertical-align: top;    /* Alinea las tarjetas en la parte superior */
+    border: 2px solid rgb(180, 180, 180) ;
+    box-shadow: 0 5px 8px rgb(110, 110, 110);
+    
+
+
+}
+
+
+
+.cuenta {
+    display: flex;
+    align-items: center; /* Esto alinea verticalmente los elementos */
+}
+
+.f_invert img {
+    height: 40px; /* Asegúrate de que la altura de la imagen coincida con la del texto */
+    margin-right: 10px; /* Añade un margen entre la imagen y el nombre de usuario */
+}
+
+.cuenta h4 {
+    margin: 0; /* Elimina los márgenes predeterminados */
+    line-height: 40px; /* Alinea verticalmente el texto */
+}
+
+.card h3 {
+    margin: 0;
+}
+
+.card p {
+    margin: 10px 0 0;
+}
+
+
+
+.card_cont{
+    padding: 20px;
+    scroll-snap-align: center;
+}
+
+::-webkit-scrollbar{
+    background-color: white;
+}
+::-webkit-scrollbar-thumb{
+    background-color: rgb(219,77,77);
+    border-radius: 16px;
+    border: solid 4px white;
+}
+
+
+
+/* new_code (ian,franco) */
+
+#text_logo_cont{
+    margin-top: auto;
+    margin-bottom: auto;
+    height: 75px;
+    overflow: hidden;
+    width: 250px;
+    display: flex;
+    transition: width .5s ease-in-out;
+    transition-delay: .2s;
+}
+header:hover > .logo > #text_logo_cont{
+    width: 0;
+}
+#text_logo{
+    height: 75px;
+    width: 250px;
+}
+.cart_counter{
+    display: flex;
+    width: 32px;
+    height: 35px;
+    background-color: #EFF487;
+    border-radius: 16px;
+    text-decoration: none;
+    color: #1E0304;
+    font-family: "Inter", sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+
+    transform: translateX(72px) translateY(0px);
+}
+
+
+.card{
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.253);
+    transition: all .25s ease-in-out;
+    display: flex;
+    left: 0;
+
+}
+
+.add-to-cart{
+    position: relative; /* Asegura que el enlace se mueva en relación con su contenedor */
+    display: block; /* Asegura que el enlace ocupe todo el ancho del contenedor */
+    padding-top: 40px;
+    margin-top: 40px;
+    z-index: 1;
+}
+
+.titulo_pro {
+    display: flex;
+    justify-content: flex-start; /* Alinea el contenido a la izquierda */
+    padding-right: 90px;
+    width: 100%; /* Asegura que el h2 ocupe todo el ancho del contenedor */
+}
+
+
+.card a{
+    text-decoration: none;
+    color:#1E0304;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: -40px;
+    width: 100%;
+    font-size: 13px;
+    font-weight: bolder;
+    font-family: 'Inter', sans-serif;
+
+}
+
+
+
+/* Estilo general del popup */
+.popup {
+    display: none; /* Oculta el popup por defecto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    z-index: 1000; /* Asegúrate de que el popup esté sobre otros elementos */
+    overflow: auto; /* Permite el desplazamiento si el contenido es más grande que la ventana */
+}
+
+/* Contenido del popup */
+.popup-content {
+    display: flex;
+    flex-wrap: wrap; /* Permite que el contenido se ajuste en pantallas pequeñas */
+    margin: 5% auto; /* Ajustado para centrar verticalmente */
+    padding: 20px;
+    width: 80%;
+    max-width: 900px; /* Ancho máximo del popup */
+    background: #fff;
+    border-radius: 8px; /* Bordes redondeados */
+    position: relative; /* Posición relativa para el botón de cierre */
+}
+
+/* Estilo del botón de cierre */
+.popup-content .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Imagen del producto en el popup */
+.popup-image {
+    flex: 1; /* Toma el espacio disponible */
+    max-width: 300px; /* Máximo ancho para la imagen */
+    margin-right: 20px; /* Espacio a la derecha de la imagen */
+}
+
+/* Contenido del centro */
+.popup-details {
+    flex: 2; /* Toma más espacio */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Títulos y textos */
+.popup-title {
+    font-size: 24px;
+    color: #1E0304;
+    margin-bottom: 10px;
+}
+
+.popup-description,
+.popup-category,
+.popup-brand {
+    margin-bottom: 10px;
+    color: #1E0304;
+}
+.precio_popup {
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #558123;
+}
+
+
+
+.popup-category,
+.popup-brand {
+    border: solid 1px #a7171c;
+    border-radius: 2px;
+    font-weight: bold;
+}
+
+.popup-details-description {
+    display: flex;
+    gap: 10px;
+    color: #1E0304;
+}
+
+.btn_add_rem{
+    display: flex;
+    margin-top: 15px;
+}
+
+/* Precio y botón */
+.popup-price-button {
+    flex: 1; /* Toma el espacio disponible */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Alinea al final a la derecha */
+    justify-content: flex-start;
+    margin-left: 20px;
+    margin-top: 20px; /* Espacio a la izquierda */
+}
+
+.boton_comprar2 {
+    margin-top: -15px;
+    text-align: center; /* Centra el botón */
+}
+
+.boton_comprar2 a {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff; /* Color del botón */
+    text-decoration: none;
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+.boton_comprar2 a:hover {
+    background-color: #0056b3; /* Color del botón al pasar el mouse */
+}
+
+
+
+.precio{
+    color: #558123;
+    font-size: 20px
+}
+
+
+.info_cont{
+    
+    margin-top: 1px;
+}
+
+.card h2{
+    font-weight: bolder;
+    margin: 0;
+    padding-bottom: 30px;
+}
+
+.boton_comprar{
+    display: flex;
+    position: relative; /* o absolute, según el caso */
+    width: auto;
+    height: 25px;
+    top: 0px;
+    background: #EFF487;
+    border-radius: 100px;
+    transition: forwards 0.4s ease;
+    margin-top: 5px;
+    z-index: 1;
+    
+}
+/* Rectangle 7 */
+.boton_comprar:hover{
+    color: #558123;
+    transform: scale(1.1);
+}
+
+
+.info{
+    margin-top: -40px;
+}
+
+
+
+.imegen_producto{
+    display: flex;
+    scale: 0.6;
+    height: 50%;
+    margin-top: 15px;
+    margin-bottom: -10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn_add_rem {
+    position: relative;
+    display: block;
+    width: auto;
+    height: calc(.7em + .7rem + 2px);
+    justify-content: center;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.0;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1.5px solid #ced4da;
+    border-radius: .25rem;
+    z-index: 10;
+}
+
+.btn_add_rem button {
+    
+    background-color: transparent;
+    left: center;
+ 
+    margin-bottom: 45px;
+    color:#1E0304; /* Color del texto blanco */
+    border: none; /* Sin borde */
+    padding: 5px 10px; /* Espaciado interno */
+    margin: 0 10px 10px; /* Margen entre botones */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+    font-size: 15px; /* Tamaño de la fuente */
+    transition: background-color 0.3s ease; /* Animación de cambio de color */
+}
+
+.btn_add_rem button:first-child{
+    left: 0;
+    
+
+}
+
+.btn_add_rem button:first-child:hover {
+    background-color: #218838;
+    width: auto;
+    /* Color al pasar el cursor por encima */
+}
+
+.btn_add_rem button:last-child:hover {
+    width: auto;
+    background-color: #dc3545; /* Color al pasar el cursor por encima */
+}
+.btn_add_rem span {
+    font-size: 18px; /* Tamaño del texto */
+    margin: 0 10px; /* Margen a los lados del número */
+}
+
+.title{
+    position: absolute;
+    display: flex;
+    top: 695px;
+    background-color: rgb(231, 231, 231);
+    left: 95px;
+    z-index: 1;
+}
+
+.title2{
+    position:absolute;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    top: 79rem;
+    left: 95px;
+}
+.title2 h1{
+    display: flex;
+    left: 0;
+    font-size: 25px;
+    font-weight: bold;
+    margin: 15px;
+    text-decoration: none;
+    color: #1E0304;
+    font-family: "Inter", sans-serif;
+}
+
+
+.title h1{
+    display: flex;
+    left: 0;
+    font-size: 25px;
+    font-weight: bold;
+    margin: 15px;
+    text-decoration: none;
+    color: #1E0304;
+    font-family: "Inter", sans-serif;
+}
+
+
+.containerC {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: rgb(241, 235, 235);
+}
+
+.carrito-container {
+    display: flex;
+    width: 95%;
+    min-height: 350px;
+    background-color: rgb(209, 208, 208);
+    border-radius: 16px;
+    padding: 10px;
+}
+
+.table-container {
+    flex: 1; /* Ocupa el 50% del ancho disponible */
+    max-height: 350px;
+    border: solid 1px rgb(255, 255, 255);
+    border-radius: 15px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-right: 60px; /* Aumenta el espacio entre la tabla y el contenedor derecho */
+}
+
+
+.table {
+    width: 100%;
+    color: black;
+    font-size: 14px;
+    table-layout: fixed; /* Mantiene el tamaño fijo de las columnas */
+    border-collapse: collapse;
+}
+
+thead {
+    background-color: rgba(255, 255, 255, 0.512);
+}
+
+.table th {
+    text-align: left;
+    padding: 20px 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.table td {
+    padding: 15px;
+    border-bottom: solid 1px aliceblue;
+    white-space: nowrap;
+}
+
+.table tbody tr:hover {
+    background-color: rgb(160, 160, 160);
+}
+
+.right-container {
+    flex: 1; /* Ocupa el 50% del ancho disponible */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Alinea el contenido hacia arriba */
+    align-items: flex-start; /* Alinea el contenido a la izquierda */
+    padding: 10px;
+}
+
+.total {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.total-label {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.total-price {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.butons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.butons form {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.btn-submit {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+
+    color: #1E0304;
+    font-size: 16px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    width: calc(100% - 40px); /* Deja espacio para la imagen */
+    margin: 5px 0;
+}
+#btn2{
+    background-color: #558123;
+}
+
+#btn1{
+    background-color: rgb(219, 77, 77);
+}
+
+#btn3{
+    background-color: #beb360;
+}
+
+.btn-submit:hover {
+    background-color: #0056b3;
+}
+
+.bolsa-img {
+    max-width: 30px;
+    max-height: 30px;
+    margin-left: 10px;
+}
+
+.limpiar-volver {
+    display: flex;
+    margin-top: 50px;
+    width: 100%;
+    justify-content: flex-start; /* Alinea los formularios al margen izquierdo */
+}
+
+.limpiar-volver form {
+    margin-left: -20px; /* Espacio entre los formularios */
+}
+
+#btn1:hover {
+    scale: 1.06;
+    filter: saturate(50%);
+}
+#btn2:hover {
+    scale: 1.04;
+    filter: saturate(50%);
+}
+#btn3:hover {
+    scale: 1.06;
+    filter: saturate(50%);
+}
+
+.page-title {
+    text-align: center;
+    font-size: 2rem;
+    margin: 20px 0; /* Espacio arriba y abajo del título */
+    color: #333; /* Color del texto */
+    font-weight: bold; /* Hacer el texto en negrita */
+}
+
+.carrito_nofound{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+    background-color: rgb(241, 235, 235);
+}
+.carrito_nofound h1{
+    font-size: 80px;
+    color: rgb(149, 149, 149);
+
+}
+
+.toast {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+    opacity: 0;
+    transition: opacity 0.5s, visibility 0.5s;
+}
+
+.toast.show {
+    visibility: visible;
+    opacity: 1;
+}

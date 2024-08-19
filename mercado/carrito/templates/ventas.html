@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Ventas</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div>
+        <h1>Mis Ventas</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>N° de Factura</th>
+                    <th>Usuario</th>
+                    <th>Total Pagado</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if ventas %}
+                    {% for venta in ventas %}
+                    <tr>
+                        <td>{{ venta.numero_factura }}</td>
+                        <td>{{ venta.usuario.username }}</td>
+                        <td>${{ venta.total_pagado }}</td>
+                        <td>{{ venta.fecha }}</td>
+     
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="4">No tienes ventas registradas</td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+    <a href="{% url 'tienda' %}">Volver a la tienda</a>
+</body>
+</html>

@@ -1,0 +1,218 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Añadir cualquier metadato adicional o enlaces a estilos si es necesario -->
+</head>
+<body>
+    {% block content %}
+    <main>
+        <div class="container">
+            <div class="slider">
+                <!-- inputs de los botones -->
+                <input type="radio" name="slider" id="sliderOne" checked>
+                <input type="radio" name="slider" id="sliderTwo">
+                <input type="radio" name="slider" id="sliderThree">
+        
+                <!-- vista de los botones -->   
+                <div class="buttons">
+                    <label for="sliderOne"></label>
+                    <label for="sliderTwo"></label>
+                    <label for="sliderThree"></label>
+                </div>
+        
+                <div class="content">
+                    <div class="one_lide">
+                        <div class="caruimage1"></div>
+                    </div>
+                    <div class="two_lide">
+                        <div class="caruimage2"></div>
+                    </div>
+                    <div class="three_lide">
+                        <div class="caruimage3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="title">
+            <h1>Mas vendidos</h1>
+        </div>
+        <div class="content_sliderP">
+            <div class="sliderP">
+                {% for producto in productos %}
+                <div class="card_cont">
+                    <div class="card">
+                        <!-- Enlace que llama a la función showProductDetails con el ID del producto -->
+                        <a href="#" onclick="showProductDetails('{{ producto.id }}'); return false;">
+                            <div class="imegen_producto">
+                                {% if producto.stock >= 1 %}
+                                <img src="{% static 'img_pro.svg' %}" alt="">
+                                {% endif %}
+                            </div>
+                            <div class="info_cont">
+                                <h2 class="titulo_pro" ><p>{{ producto.nombre|truncatechars:18 }}</p></h2>
+                        </a>
+                                <div class="info">
+                                    <p>{{ producto.descripcion|truncatechars:18 }}</p>
+                                    <p class="precio"><strong>${{ producto.precio }} USD</strong></p>
+                                    <div class="btn_add_rem">
+                                        <button onclick="updateQuantity('{{ producto.id }}', 1)">+</button>
+                                        <span id="quantity-{{ producto.id }}">1</span>
+                                        <button onclick="updateQuantity('{{ producto.id }}', -1)">-</button>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        <div class="boton_comprar">
+                            <a href="#" class="add-to-cart" onclick="addToCart('{{ producto.id }}'); return false;">Añadir al carrito</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="title2">
+            <h1>Lo ultimo</h1>
+        </div>
+        <div class="content_sliderP">
+            <div class="sliderP">
+                {% for producto in productos %}
+                <div class="card_cont">
+                    <div class="card">
+                        <!-- Enlace que llama a la función showProductDetails con el ID del producto -->
+                        <a href="#" onclick="showProductDetails('{{ producto.id }}'); return false;">
+                            <div class="imegen_producto">
+                                {% if producto.stock >= 1 %}
+                                <img src="{% static 'img_pro.svg' %}" alt="">
+                                {% endif %}
+                            </div>
+                            <div class="info_cont">
+                                <h2 class="titulo_pro" ><p>{{ producto.nombre|truncatechars:18 }}</p></h2>
+                        </a>
+                                <div class="info">
+                                    <p>{{ producto.descripcion|truncatechars:18 }}</p>
+                                    <p class="precio"><strong>${{ producto.precio }} USD</strong></p>
+                                    <div class="btn_add_rem">
+                                        <button onclick="updateQuantity('{{ producto.id }}', 1)">+</button>
+                                        <span id="quantity-{{ producto.id }}">1</span>
+                                        <button onclick="updateQuantity('{{ producto.id }}', -1)">-</button>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        <div class="boton_comprar">
+                            <a href="#" class="add-to-cart" onclick="addToCart('{{ producto.id }}'); return false;">Añadir al carrito</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        {% for producto in productos %}
+        <div id="product-popup-{{ producto.id }}" class="popup">
+            <div class="popup-content">
+                <span class="close" onclick="closePopup('{{ producto.id }}')">&times;</span>
+                <img id="popup-product-image-{{ producto.id }}" src="{% static 'img_pro.svg' %}" alt="">
+                <div class="popup-details">
+                    <h2 id="popup-product-name-{{ producto.id }}"></h2>
+                    <div class="popup-details-description">
+                        <p id="popup-product-category-{{ producto.id }}"></p>
+                        <p id="popup-product-brand-{{ producto.id }}"></p>
+                    </div>
+                    <p id="popup-product-description-{{ producto.id }}"></p>
+                </div>
+                <div class="popup-price-button">
+                    <p id="popup-product-price-{{ producto.id }}"></p>
+                    <div class="btn_add_rem">
+                        <button onclick="updateQuantity('{{ producto.id }}', 1)">+</button>
+                        <span id="quantity-popup-{{ producto.id }}">1</span>
+                        <button onclick="updateQuantity('{{ producto.id }}', -1)">-</button>
+                    </div>
+                    <div class="boton_comprar2">
+                        <a href="#" class="add-to-cart" onclick="addToCartPopup('{{ producto.id }}'); return false;">Añadir al carrito</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        {% endfor %}
+    </main>
+
+    <script>
+        const quantities = {};
+
+        function updateQuantity(productId, change) {
+            if (!quantities[productId]) {
+                quantities[productId] = 1;
+            }
+            quantities[productId] += change;
+            if (quantities[productId] < 1) {
+                quantities[productId] = 1;
+            }
+        
+            if (productId === currentProductId) {
+                // Si estamos en el popup, actualiza la cantidad en el popup
+                document.getElementById('quantity-popup').innerText = quantities[productId];
+            } else {
+                // Si estamos en los sliders, actualiza la cantidad del slider correspondiente
+                document.getElementById(`quantity-${productId}`).innerText = quantities[productId];
+            }
+        }
+
+        var ids = [];
+        function addToCart(productId, quantity) {
+            quantity = quantity || 1; // Si la cantidad no se pasa, usar 1 como valor predeterminado
+            
+            fetch("{% url 'agregar_carrito' 0 %}".replace('0', productId) + '?cantidad=' + quantity, {
+                method: 'GET'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (ids.includes(productId)) {
+                    console.log("error: product is already in list")
+                } else {
+                    document.getElementById('cart-count').innerText = Number(document.getElementById('cart-count').innerText) + 1;
+                    ids.push(productId);
+                    sessionStorage.setItem("carrito_counter", document.getElementById('cart-count').innerText);
+                }
+            })
+            .catch(error => console.error('Error adding to cart:', error));
+        }
+
+        function showProductDetails(productId) {
+            fetch(`/product-details/${productId}`)
+                .then(response => response.json())
+                .then(product => {
+                    openPopup(productId, product);
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function openPopup(productId, product) {
+            document.getElementById(`popup-product-name-${productId}`).innerText = product.nombre;
+            document.getElementById(`popup-product-description-${productId}`).innerText = product.descripcion;
+            document.getElementById(`popup-product-price-${productId}`).innerText = `$${product.precio} USD`;
+            document.getElementById(`popup-product-category-${productId}`).innerText =  `${product.categoria}`;
+            document.getElementById(`popup-product-brand-${productId}`).innerText =  `${product.marca}`;
+
+            document.getElementById(`product-popup-${productId}`).style.display = 'block';
+        }
+
+        function closePopup() {
+            document.getElementById('product-popup').style.display = 'none';
+        }
+        function addToCartPopup() {
+            if (currentProductId) {
+                const quantity = quantities[currentProductId] || 1;
+                addToCart(currentProductId, quantity);
+            }
+        }
+
+    </script>
+    {% endblock %}
+</body>
+</html>

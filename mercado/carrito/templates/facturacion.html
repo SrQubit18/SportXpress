@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Facturas</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div>
+        <h1>Lista de Pedidos</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Usuario</th>
+                    <th>N° de Factura</th>
+                    <th>Total</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                    <th>Acciones</th> <!-- Añadir columna para acciones -->
+                </tr>
+            </thead>
+            <tbody>
+                {% if facturas %}
+                    {% for factura in facturas %}
+                    <tr>
+                        <td>{{ factura.usuario.username }}</td>
+                        <td>{{ factura.numero_factura }}</td>
+                        <td>${{ factura.total }}</td>
+                        <td>{{ factura.fecha }}</td>
+                        <td>Pendiente</td>
+                        <td>
+                            <a href="{% url 'entregar_pedido' factura.id factura.total %}">Marcar como Entregado</a>
+                            <a href="{% url 'anular_pedido' factura.id %}">Anular Pedido</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="5">No hay facturas disponibles</td> <!-- Ajustar colspan -->
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+    <a href="{% url 'tienda' %}">Volver</a>
+    <a href="{% url 'account' %}">Atrás</a>
+    <a href="{% url 'estado_cuenta_por_fecha' %}">Estado de Cuenta por Fecha</a>
+    <a href="{% url 'estado_cuenta_por_cliente' %}">Estado de Cuenta por Cliente</a>
+</body>
+</html>

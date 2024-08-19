@@ -1,0 +1,15 @@
+{% extends 'admin_manager.html'%}
+{% block dialog %}
+<dialog id="edit_dialog">
+    <a href="{% url 'dialgo_back' %}">X</a>
+    <form method="POST">
+        {% csrf_token %}
+        {{ edit_form.as_p }}
+        <input type="submit" value="apply">
+    </form>
+</dialog>
+<script>
+    var dialog = document.getElementById("edit_dialog");
+    dialog.showModal();
+</script>
+{% endblock %}

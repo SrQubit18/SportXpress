@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:wght@900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static '/style.css' %}">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"> -->
+    
+</head>
+<body>
+    <!--EL MENU Y LA BARRA DE BUSQUEDA -->
+    <header >
+        <div class="logo">
+            <a href="{% url 'tienda' %}"><img src="{% static 'logo.svg' %}" alt=""></a>
+            <div id="text_logo_cont">
+                <a href="{% url 'tienda' %}"><img id="text_logo" src="{% static 'logo_2.svg' %}" alt=""></a>
+            </div>
+        </div>
+        <div></div>
+        <div class="buscador">
+            <form class="d-flex" role="search" method="POST" action="{% url 'buscar' %}">
+                {% csrf_token %}
+                <input
+                   class="form-control me-2"
+                   type="search"
+                   placeholder="Buscar"
+                   name="search_query"
+                   required aria-label="Buscar"
+                >
+                <button type="submit">
+                    <img src="{% static 'busqueda.png' %}" alt="">
+                </button>
+            </form>
+        </div>
+        <div class="menu">
+            {% if user.is_authenticated %}
+                <div class="cuenta">
+                    <h4><a href="{% url 'account' %}" class="f_invert"><img src="{% static 'cuenta.png' %}" alt=""></a></h4>
+                    <h4>{{ user.username }}</h4>
+                </div>
+            {% else %}
+                <h4><a href="{% url 'register' %}">REGISTRO</a></h4>
+                <H4><a href="{% url 'login' %}">LOGIN</a></H4>
+            {% endif %}
+
+                <a class="cart_counter" href="{% url 'carrito' %}">
+                    <span id="cart-count">0</span>
+                </a>
+                <a href="{% url 'carrito' %}">
+                    <img src="{% static 'carrito.svg' %}" alt="">
+                </a>
+
+        </div>
+        
+    </header>
+    <!-- CATEGORIAS Y FILTROS DE BUSQUEDA -->
+    <div class="categorias">
+        <div class="box">
+            <a href=""><img src="{% static 'menu.png' %}" alt=""></a>
+    
+            <ul>
+                <li><a href="">CATEGORIAS</a></li>
+                <li><a href="">ZAPATILLAS</a></li>
+                <li><a href="">ROPA</a></li>
+                <li><a href="">ACCESORIOS</a></li>
+                <li><a href="">MARCAS</a></li>
+            </ul>
+        </div>
+    </div>
+    {% block content %}
+    {% endblock %}
+    
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="row">
+                <div class="footer-col">
+                    <h4>COMPANY</h4>
+                    <ul>
+                        <li><a href="# ">ABOUT US</a></li>
+                        <li><a href="# ">OUR SERVICES</a></li>
+                        <li><a href="# ">PRIVACY POLICY</a></li>
+                        <li><a href="# ">AFFILIATE PROGRAM</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>GET HELP</h4>
+                    <ul>
+                        <li><a href="# ">FAQ</a></li>
+                        <li><a href="# ">SHIPPING</a></li>
+                        <li><a href="# ">RETURNS</a></li>
+                        <li><a href="# ">ORDER STATUS</a></li>
+                        <li><a href="# ">PAYMENT OPTIONS</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>ONLINEA SHOP</h4>
+                    <ul>
+                        <li><a href="# ">WATCH</a></li>
+                        <li><a href="# ">BAG</a></li>
+                        <li><a href="# ">SHOES</a></li>
+                        <li><a href="# ">DRESS</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- <script>
+        var carrito_counter = sessionStorage.getItem("carrito_counter")
+        document.getElementById('cart-count').innerText = carrito_counter
+    </script> -->
+</body>
+</html>
