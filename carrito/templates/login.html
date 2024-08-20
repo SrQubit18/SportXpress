@@ -2,12 +2,24 @@
 {% load static %}
 
 {% block content %}
-    <h1>Login</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Iniciar sesión</button>
-    </form>
-    <p>No tienes una cuenta? <a href="{% url 'register' %}">Regístrate</a></p>
-    <a href="{% url 'tienda' %}">vovler</a>
+<div class="caja">
+    <div class="top">
+        <h1>Inicio de sesión</h1>
+    </div>
+   
+    <div class="inicio">
+        <form method="post" class="login-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <button type="submit" class="btn-submit">Iniciar sesión</button>
+            <div class="login-sec-btn-cont">
+                <p>
+                    No tienes una cuenta? <a id="register-link" href="{% url 'register' %}">Regístrate</a> |
+                    <a id="back" href="{% url 'tienda' %}">Volver a inicio</a>
+                </p>
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}

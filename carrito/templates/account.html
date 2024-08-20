@@ -1,25 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>{{ user.username }}</h1>
-    <a href="{% url 'ver-compra' %}">ver</a>
-    <a href="{% url 'logout_dialog' %}">logout</a>
-    {% if user.is_authenticated %}
-        <a href="{% url 'admin_manager' %}"></a>
-        {% if user.is_superuser %}
-            <a href="{% url 'admin_manager' %}">database_manager</a>
-            <a href="{% url 'listar_ventas' %}">Ver ventas</a>
-            <a href="{% url 'listar_facturas' %}">Ver Pedidos</a>
-            <a href="{% url 'logout_dialog' %}">logout</a>
+
+
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<div class="cuenta_cont">
+    <div class="datos">
+        <div class="fotous">
+           <div class="flex">    
+                <img src="{% static '/img/profile-user.png' %}" alt="">
+                <form method="post">
+                    {% csrf_token %}
+                    <input style="text-transform: none;" name="name" type="text" placeholder="{{ user.username }}">
+                </form>
+                <label>
+                    <input type="checkbox">
+                    <img class="edit" src="{% static 'svg_repo/note-svgrepo-com.svg' %}" alt="">
+                </label>
+           </div> 
+        </div>
+        {% if user.is_authenticated %}
+            <div class="account_btn_cont">
+                <div>
+                    <a class="account_btn" href="{% url 'tienda' %}">Volver inicio</a>
+                    <a class="account_btn" href="{% url 'ver-compra' %}">Ver Pendientes</a>
+                    {% if user.is_superuser %}
+                        <a class="account_btn" href="{% url 'admin_manager' %}">Productos</a>
+                        <a class="account_btn" href="{% url 'listar_ventas' %}">Ver ventas</a>
+                        <a class="account_btn" href="{% url 'listar_facturas' %}">Ver Pedidos no entregados</a>
+                    {% endif %}
+                </div>
+                <a class="account_btn" href="{% url 'logout_dialog' %}">Cerrar sesion</a>
+            </div>
         {% endif %}
+        <div class="historialdecompra">
+            <h3>Historial de Compra</h3>
+            <div class="historia_cont">
+                {% if historia|length > 0 %}
+                {% for compra in historia %}
+                    <div class="card_cont_v">
+                        <div class="card_v">
+                            <h2>{{ compra.numero_factura }}</h2>
+                            <div class="flex_cont">
+                                <h2 class="precio">${{ compra.total }} USD</h2>
+                                <h2>{{ compra.fecha_entrega|date:"M d, Y / H:m" }}</h2>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                {% else %}
+                    <h2>historial de compra vacio</h2>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% block r_dialog %}
+
+{% endblock %}
+
+{% endblock %}
+
+
+<!-- 
+<h1>{{ user.username }}</h1>
+{% if user.is_authenticated %}
+    <a href="{% url 'admin_manager' %}"></a>
+    {% if user.is_superuser %}
+        <a href="{% url 'admin_manager' %}">database_manager</a>
+        <a href="{% url 'listar_ventas' %}">Ver ventas</a>
+        <a href="{% url 'listar_facturas' %}">Ver Pedidos</a>
+        <a href="{% url 'logout_dialog' %}">logout</a>
     {% endif %}
-    <a href="{% url 'tienda' %}">volver inicio</a>
-    {% block dialog %}
-    {% endblock %}
-</body>
-</html>
+{% endif %}
+<a href="{% url 'tienda' %}">volver inicio</a>
+{% block dialog %}
+{% endblock %} 
+-->

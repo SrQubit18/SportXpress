@@ -3,43 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout page</title>
-</head>
-<body>
-    <h1>Checkout for product: {{product.name}}</h1>
-    <div class="product-container">
-        <div class="products">
-            <img class="img" src="{{product.image}}" alt="">
-            <p> se efectuara un pago de ${{ total }} USD</p>
-            
-            <h2> confirmar compra </h2>
-            <!-- <button>Purchase</button> -->
-            {{paypal.render}}
-        </div>  
-    </div>
+    <title>Checkout Page</title>
     <style>
         body {
-            padding: 10px;
+            font-family: Arial, sans-serif;
+            padding: 200px;
+            height: auto;
+            width: auto;
+            margin: auto;
+            background-color: #f4f4f9;
             box-sizing: border-box;
         }
 
         .product-container {
             display: flex;
-            flex-direction: row;
+            margin-top: 50%;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             width: 100%;
-            height: 100vh;
+            height: 100%;
+            max-width: 800px;
+            margin: auto;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
         }
+
+        .products {
+            text-align: center;
+        }
+
         .img {
-            width: 60%;
-            border-radius: 50px;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
         }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        p {
+            font-size: 18px;
+            color: #555;
+        }
+
+        h2 {
+            font-size: 20px;
+            margin-top: 20px;
+            color: #000000;
+        }
+
         button {
-            padding: 10px;
+            padding: 15px 30px;
             border-radius: 5px;
-            background-color: dodgerblue;
+            background-color: #007bff;
             color: white;
             border: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .paypal-button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     </style>
+</head>
+<body>
+
+    <div class="product-container">
+        <div class="products">
+            <img class="img" src="{{product.image}}" alt="{{product.name}}">
+            <h1>Se efectuará un pago de ${{ total }} USD</h1>
+            <h2>Confirmar compra</h2>
+            <div class="paypal-button-container">
+                {{paypal.render}}
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>

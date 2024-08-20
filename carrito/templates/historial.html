@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div>
+    <h1>Historial de compras</h1>
+    <div>
+        {% for compra in historial %}
+            <p>{{ compra.numero_factura }}</p>
+        {% endfor %}
+    </div>
+</div>

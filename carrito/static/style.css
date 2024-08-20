@@ -1,3 +1,8 @@
+*{
+    margin: 0;
+    padding: 0;
+    text-transform: capitalize;
+}
 
 body{
     background-color: white;
@@ -6,16 +11,23 @@ body{
     font-family: "Inter", sans-serif;
 }
 
+.search_prod_cont{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
 /* Estilos del Popup */
 .popup {
     display: none;
     position: fixed;
-    z-index: 1000;
+    z-index: 1010;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
+
     background-color: rgba(0,0,0,0.4); /* Fondo oscuro */
 }
 
@@ -53,22 +65,22 @@ body{
 }
 /* LOGO Y BUSQUEDA*/
 header .logo img {
-   width: 80px;
+   height: 72px;
 
 }
 header .logo{
     display: flex;
     margin-top: auto;
-    margin-left: 30px;
+    margin-left: 2vw;
     margin-bottom: auto;
-
- }
+}
 header .buscador > form > button > img {
     width: 25px;
     height: 25px;
 }
-header .buscador > form {
+header .buscador {
     display: flex;
+    flex-direction: row;
 }
 header .buscador > form > button {
     background: none;
@@ -93,7 +105,10 @@ header .buscador > form >input:focus {
     outline: none;
     border: none;
 }
-
+header .buscador > form {
+    display:flex;
+    flex-direction: row;
+}
 header .buscador  {
     position: absolute;
     transition: all .5s ease-in-out;
@@ -104,7 +119,7 @@ header .buscador  {
     height: 25px;
     width:125px;
     left: 50%;
-    top: 45px;
+    top: 47.5px;
     transform: translateX(-50%) translateY(-50%);
 }
 
@@ -115,16 +130,15 @@ header:hover > .buscador > form >  input{
     width:585px;
 }
 header .menu img{
-    margin-top: 10px;
-    margin-left: 10px;
-    width: 30px;
-    height: 30px;
-    
+    width: 48px;
+    height: 48px;
 }
 header .menu h4 a{
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 400;
     margin: 15px;
+    margin-left: 10px;
+    
     text-decoration: none;
     color: black;
     font-family: "Inter", sans-serif;
@@ -158,7 +172,8 @@ body{
     position: sticky;
     top: 0;
     height: 59px;
-    z-index: 1000;
+    z-index: 4;
+    width: 100%;
 }
 
 
@@ -213,7 +228,8 @@ body{
 /* FOOTER */
  footer {
     background-color: rgb(219, 77, 77);
-    padding: 70PX 0;
+    padding: 70px 0;
+    margin: 0;
     
  }
 
@@ -221,6 +237,7 @@ body{
     max-width: 1170px;
     margin: auto;
 }
+
 
 .row ul{
     list-style: none;
@@ -237,7 +254,7 @@ body{
 
 .footer-col h4{
     font-family: "Inter", sans-serif;
-    font-size: 18px;
+    font-size: 19px;
     text-transform: capitalize;
     margin-bottom: 30px;
     font-weight: 500;
@@ -248,7 +265,7 @@ body{
     position: absolute;
     left: 0;
     bottom: -10px;
-    background-color: aqua;
+    background-color: rgb(255, 255, 255);
     height: 2px;
     box-sizing: border-box;
     width: 50px;
@@ -270,8 +287,10 @@ body{
 }
 
 .footer-col ul li a:hover{
+    scale: 1.1;
     color: rgb(0, 0, 0);
-    padding-left: 10px;
+    padding: 5px;
+
 }
 
 .ejm {
@@ -443,6 +462,22 @@ body{
     66.67%, 100% { opacity: 1; }
 }
 
+/* Estilo para el contenedor principal */
+
+.containerP {
+    position: sticky;
+    width: 95%;
+    margin-left: 2%;
+    max-width: 1500px;
+    height: auto;
+    background-color: rgb(231, 231, 231);
+    padding: 10px;
+    display: flex;
+    gap: 20px; /* Espacio entre filtros y productos */
+}
+
+
+
 
 .content_sliderP{
     display: flex;
@@ -450,21 +485,20 @@ body{
     justify-content: center; /* Centra horizontalmente */
     align-items: center;    /* Centra verticalmente */
     height: 500px;          /* Altura del contenedor, puedes ajustar */
-    background-color: rgb(231, 231, 231);
+
     padding-top: 80px;
 }
 
 .sliderP {
     scroll-snap-type: x mandatory;
     width: 90%;
-    max-width: 1200px; /* Ajusta según sea necesario */
     height: 85%;
     max-height: 800px; /* Ajusta según sea necesario */
-    background-color: rgb(231, 231, 231);
+    background-color: rgb(255, 255, 255);
     display: flex;
-    gap: 0px;          /* Espacio entre tarjetas */
-    padding: 1px;
-    justify-content: center;
+    gap: 10px;          /* Espacio entre tarjetas */
+    padding: 10px;
+    /* justify-content: center; */
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
@@ -472,7 +506,6 @@ body{
     margin-bottom: 30px;    /* Mantiene las tarjetas en una sola línea horizontal */
 
 }
-
 
 
 .card {
@@ -488,9 +521,35 @@ body{
     vertical-align: top;    /* Alinea las tarjetas en la parte superior */
     border: 2px solid rgb(180, 180, 180) ;
     box-shadow: 0 5px 8px rgb(110, 110, 110);
+}
+
+.card_cont{
+    padding:16px;
+}
+.card_cont:hover {
+    display: flex;
+    transform: translateY(-0px) scale(1.05);
+    position: relative;
+}
+.card_cont:hover > .card > a > .imegen_producto{
+    opacity: 75%;
+}
+.card_cont:hover + *{
+    display: flex;
+    transform: translateY(-0px) scale(1.025);
+    position: relative;
+}
+.card_cont:hover + * > .card > a > .imegen_producto{
+    opacity: 50%;
+}
+.card_cont:has(+*:hover){
+    display: flex;
+    transform: translateY(-0px) scale(1.025);
+    position: relative;
+}
+.card_cont:has(+*:hover) > .card > a > .imegen_producto{
+    opacity: 50%;
     
-
-
 }
 
 
@@ -498,16 +557,17 @@ body{
 .cuenta {
     display: flex;
     align-items: center; /* Esto alinea verticalmente los elementos */
+    margin-right: 32px;
 }
 
-.f_invert img {
-    height: 40px; /* Asegúrate de que la altura de la imagen coincida con la del texto */
-    margin-right: 10px; /* Añade un margen entre la imagen y el nombre de usuario */
+.f_invert > img {
+    min-height: 48px; /* Asegúrate de que la altura de la imagen coincida con la del texto */
+    min-width: 48px; /* Asegúrate de que la altura de la imagen coincida con la del texto */
 }
 
 .cuenta h4 {
     margin: 0; /* Elimina los márgenes predeterminados */
-    line-height: 40px; /* Alinea verticalmente el texto */
+    font-size: 32px
 }
 
 .card h3 {
@@ -518,11 +578,16 @@ body{
     margin: 10px 0 0;
 }
 
-
+.productos-container{
+    width: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
 
 .card_cont{
-    padding: 20px;
     scroll-snap-align: center;
+    width: min-content;
+    transition: all .5s ease-in-out;
 }
 
 ::-webkit-scrollbar{
@@ -578,10 +643,7 @@ header:hover > .logo > #text_logo_cont{
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.253);
     transition: all .25s ease-in-out;
     display: flex;
-    left: 0;
-
 }
-
 .add-to-cart{
     position: relative; /* Asegura que el enlace se mueva en relación con su contenedor */
     display: block; /* Asegura que el enlace ocupe todo el ancho del contenedor */
@@ -593,10 +655,18 @@ header:hover > .logo > #text_logo_cont{
 .titulo_pro {
     display: flex;
     justify-content: flex-start; /* Alinea el contenido a la izquierda */
-    padding-right: 90px;
+    padding-right: 20px;
     width: 100%; /* Asegura que el h2 ocupe todo el ancho del contenedor */
 }
 
+.quitar_btn{
+    text-decoration: none;
+}
+
+.delete_comprar a{
+    background-color: #dc3545;
+    text-decoration: none;
+}
 
 .card a{
     text-decoration: none;
@@ -612,8 +682,6 @@ header:hover > .logo > #text_logo_cont{
     font-family: 'Inter', sans-serif;
 
 }
-
-
 
 /* Estilo general del popup */
 .popup {
@@ -688,9 +756,10 @@ header:hover > .logo > #text_logo_cont{
 
 .popup-category,
 .popup-brand {
-    border: solid 1px #a7171c;
-    border-radius: 2px;
+    border-radius: 16px;
+    padding: 5px;
     font-weight: bold;
+    background-color: #EFF487;
 }
 
 .popup-details-description {
@@ -754,6 +823,7 @@ header:hover > .logo > #text_logo_cont{
 }
 
 .boton_comprar{
+    transition: all .5s ease-in-out;
     display: flex;
     position: relative; /* o absolute, según el caso */
     width: auto;
@@ -761,7 +831,6 @@ header:hover > .logo > #text_logo_cont{
     top: 0px;
     background: #EFF487;
     border-radius: 100px;
-    transition: forwards 0.4s ease;
     margin-top: 5px;
     z-index: 1;
     
@@ -787,6 +856,8 @@ header:hover > .logo > #text_logo_cont{
     margin-bottom: -10px;
     justify-content: center;
     align-items: center;
+    opacity: 35%;
+    transition: all .5s ease-in-out;
 }
 
 .btn_add_rem {
@@ -845,11 +916,11 @@ header:hover > .logo > #text_logo_cont{
 }
 
 .title{
-    position: absolute;
+   position: relative;
     display: flex;
-    top: 695px;
-    background-color: rgb(231, 231, 231);
-    left: 95px;
+    top: 30px;
+    width: 87%;
+    left: 6.2%;
     z-index: 1;
 }
 
@@ -889,23 +960,28 @@ header:hover > .logo > #text_logo_cont{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     background-color: rgb(241, 235, 235);
+
+    width: auto;
+    padding: 32px;
+    background-color: rgb(231, 231, 231);
+    border: solid 1px gray ;
+    margin: 5%;
+    border-radius: 16px;
 }
 
 .carrito-container {
     display: flex;
-    width: 95%;
     min-height: 350px;
-    background-color: rgb(209, 208, 208);
-    border-radius: 16px;
+    background-color: rgb(231, 231, 231);
     padding: 10px;
+    
 }
 
 .table-container {
     flex: 1; /* Ocupa el 50% del ancho disponible */
     max-height: 350px;
-    border: solid 1px rgb(255, 255, 255);
+    border: solid 1px gray ;
     border-radius: 15px;
     overflow-y: auto;
     overflow-x: hidden;
@@ -935,7 +1011,7 @@ thead {
 
 .table td {
     padding: 15px;
-    border-bottom: solid 1px aliceblue;
+    border: solid 1px gray ;
     white-space: nowrap;
 }
 
@@ -1057,7 +1133,8 @@ thead {
     background-color: rgb(241, 235, 235);
 }
 .carrito_nofound h1{
-    font-size: 80px;
+    font-size: 40px;
+    text-align: center;
     color: rgb(149, 149, 149);
 
 }
@@ -1083,4 +1160,1182 @@ thead {
 .toast.show {
     visibility: visible;
     opacity: 1;
+}
+
+.registro_login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* LOGIN LOGIN LOGIN LOGIN LOGIN y REGISTER REGISTER REGISTER */
+.top {
+    background-color: rgb(255, 255, 255);
+}
+.caja h2{
+    margin-left: 30px;
+    font-size: 40px;
+    font-family: "Inter", sans-serif;
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+}
+
+.caja {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+}
+.top h1 {
+    text-align: center;
+    color: #333;
+}
+
+.inicio {
+    margin-top: 20px;
+}
+
+.top h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.inicio form {
+    display: flex;
+    flex-direction: column;
+}
+
+.inicio form .btn-registrarse {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.inicio form .btn-registrarse:hover {
+    background-color: #0056b3;
+}
+
+.login_sec_btn_cont {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.login_sec_btn_cont p {
+    margin: 0;
+}
+
+.login_sec_btn_cont .btn-link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login_sec_btn_cont .btn-link:hover {
+    text-decoration: underline;
+}
+
+.login_sec_btn_cont p, .login_sec_btn_cont a {
+    display: inline-block;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.login-form input[type="text"]:focus,
+.login-form input[type="password"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+
+.inicio2 .form-group input[type="text"],
+.inicio2 .form-group input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.inicio2 .form-group input[type="text"]:focus,
+.inicio2 .form-group input[type="password"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.btn-submit {
+    background-color: #216d2f;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #0056b3;
+}
+
+.login-sec-btn-cont p {
+    text-align: center;
+}
+
+.login-sec-btn-cont a {
+    color: #007bff;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0 5px;
+}
+
+.login-sec-btn-cont a:hover {
+    text-decoration: underline;
+}
+
+#back {
+    display: inline-block;
+}
+/* Estilo para la sección de registro */
+.top2 {
+    background-color: rgb(255, 255, 255);
+}
+
+.caja2 h2{
+    margin-left: 30px;
+    font-size: 40px;
+    font-family: "Inter", sans-serif;
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+}
+
+.caja2 {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+}
+
+.top2 h1 {
+    text-align: center;
+    color: #333;
+}
+
+.inicio2 {
+    margin-top: 20px;
+}
+
+.inicio2 form {
+    display: flex;
+    flex-direction: column;
+}
+
+.inicio2 form .btn-registrarse {
+    background-color: #278319;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.inicio2 form .btn-registrarse:hover {
+    background-color: #0056b3;
+}
+
+.login_sec_btn_cont2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.login_sec_btn_cont2 p {
+    margin: 0;
+}
+
+.login_sec_btn_cont2 .btn-link2 {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login_sec_btn_cont2 .btn-link2:hover {
+    text-decoration: underline;
+}
+
+.login_sec_btn_cont2 p, .login_sec_btn_cont2 a {
+    display: inline-block;
+}
+
+
+/* CAMBIOS AL PERFIL CAMBIOS AL PERFIL CAMBIOS AL PERFIL  */
+/* CAMBIOS AL PERFIL CAMBIOS AL PERFIL CAMBIOS AL PERFIL  */
+/* CAMBIOS AL PERFIL CAMBIOS AL PERFIL CAMBIOS AL PERFIL  */
+.titulo h3{
+    margin-left: 30px;
+    font-size: 40px;
+    font-family: "Inter", sans-serif;
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+}
+.user h3{
+    font-size: 30px;
+    font-family: "Inter", sans-serif;
+}
+.personalizar input{
+    padding: 5px;
+    font-size: 30px;
+    border: 1px solid rgb(43, 43, 43);
+    background-color: rgba(0, 0, 0, 0.527);
+    color: aliceblue;
+    border-radius: 10px;
+
+}
+input::placeholder {
+    opacity: 1;
+    color: rgb(179, 179, 179);
+}
+.user{
+    margin: 15px;
+    padding: 20px;
+    border-radius: 20px;
+    height: 340px;
+    width: 700px;
+    background-color:#C1F487;
+    color: rgb(0, 0, 0);
+}
+.user  button{
+    font-weight: 700;
+    background-color: rgba(0, 0, 0, 0.521);
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid rgb(36, 36, 36);
+}
+.user button:hover {
+    background-color: rgb(219, 77, 77);
+}
+.user button, .user input {
+    margin-left: 20px;
+}
+.aviso {
+    display: inline-block;
+    font-weight: 700;
+    margin: 20px;
+    font-size: 20px;
+    font-family: "Inter", sans-serif;
+    background-color: rgb(219, 77, 77);
+    border-radius: 20px;
+    padding: 5px;
+}
+.aviso img{
+    margin: 10px;
+    float: left;
+    width: 40px;
+
+}
+.cajon{
+    display: flex;
+    justify-content: center;
+}
+
+.password{
+    margin-left: 10px;
+    padding: 30px;
+    border-radius: 20px;
+    height: 340px;
+    width: 700px;
+    background-color:#C1F487;
+    color: rgb(0, 0, 0);
+}
+.password h3{
+    font-size: 30px;
+    font-family: "Inter", sans-serif;
+}
+.password  button{
+    font-weight: 700;
+    background-color: rgba(0, 0, 0, 0.466);
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid rgb(36, 36, 36);
+}
+.password input{
+    margin: 10px;
+
+}
+.password button:hover {
+    background-color: red;
+}
+.personalizar {
+    margin: 15px;
+}
+
+
+
+/* flex code */
+.flex label img {
+    width: 48px;
+    height: 48px;
+}
+.flex label input {
+    display: none;
+}
+.flex > form {
+    width: 100%;
+}
+.flex > form > input {
+    border: none;
+    color: black;
+    font-size: 64px;
+    font-weight: bold;
+    padding:2px;
+    width: 100%;
+    background-color: transparent;
+    border: solid 1px rgb(231, 231, 231); 
+    border-radius: 16px;
+    transition: border .5s ease-in-out;
+    pointer-events: none;
+}
+.flex > form > input::placeholder {
+    color: black;
+}
+.flex a{
+   color: black;
+   text-decoration: none;    
+}
+.flex {
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+}
+.flex:has(input:checked) > h3{
+    display:none;
+}
+.flex:has(input:checked) > form > input[type="text"]{
+    display:flex;
+    border: solid 1px gray;
+    transition: border .5s ease-in-out;
+    pointer-events:auto;
+}
+
+
+
+/* experimental */
+
+.account_btn{
+    margin: 5px;
+    display: inline-flex;
+    padding: 10px;
+    text-decoration: none;
+    color: #ffffff;
+    background-color: rgb(219, 77, 77); 
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    filter:brightness(100%);
+    transition: all .25s ease-in-out;
+}
+
+.account_btn:hover{
+    scale: 1.1;
+    filter:brightness(150%);
+}
+.account_btn_cont{
+    gap: 16px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+}
+.account_btn_cont > div{
+    display: flex;
+    
+}
+
+/* experimental */
+
+
+/* HISTORIAL DE COMPRA HISTORIAL DE COMPRA  */
+/* HISTORIAL DE COMPRA HISTORIAL DE COMPRA  */
+.historialdecompra h3{
+    font-size: 40px;
+}
+.historialdecompra button {
+   border: none;
+   font-size: 18px;
+   width: 200px;
+   height: 70px;
+   border-radius: 15px;
+   background-color: black;
+   color: aliceblue;
+   margin-left: 35px;
+}
+.historialdecompra {
+    margin: 20px;
+}
+/*  silder slider HISTORIAL DE COMPRA HISTORIAL DE COMPRA  */
+.content_sliderP{
+    margin: 10px;
+    padding: 10px;
+
+    border-radius: 20px;
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center;    /* Centra verticalmente */
+    height: 470px;          /* Altura del contenedor, puedes ajustar */
+}
+.datos{
+    width: auto;
+    padding: 32px;
+    background-color: rgb(231, 231, 231);
+    border: solid 1px gray ;
+    margin: 5%;
+    border-radius: 16px;
+}
+.cuenta_cont{
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+
+/* v_cards testing */
+/* v_cards testing */
+/* v_cards testing */
+
+.card_v{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+    align-items:center;
+    justify-content: space-between;
+    padding-top: 16px; 
+    padding-bottom: 16px; 
+}
+.card_cont_v{
+    width: 100%;
+    border-top: solid 1px darkgray;
+}
+.historia_cont{
+    display: flex;
+    flex-direction: column;
+}
+.flex_cont{
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+
+.verificacion {
+    position: fixed;
+    min-width: 210px;
+    bottom: 20px;
+    right: 20px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    border-radius: 5px;
+    display: none;
+    z-index: 1000;
+}
+
+.verificacion .close {
+    position: absolute;
+    top: 12px;
+    right: 25px;
+    cursor: pointer;
+    font-size: 20px;
+    color:#215d15;
+}
+
+.verificacion.show {
+    display: block;
+    animation: show_slide 0.5s ease forwards;
+}
+
+.verificacion.hide {
+    animation: hide_slide 0.5s ease forwards;
+}
+
+@keyframes show_slide {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes hide_slide {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.TableAdmVer-container{
+    width: 100%;
+    height: 600px;
+    background-color: rgb(241, 235, 235);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.TableAdmText h1{
+    font-size: 30px;
+}
+
+.TableAdmVer{
+    width: 80%;
+    height: 500px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 15px;
+    box-shadow: 0px 10px 10px 0 rgba(0, 0, 0, 0.402);
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+#TableAdmVer1{
+    width: 99%;
+}
+
+.tableAV{
+    overflow-y: scroll;
+    max-height: 400px;
+    /* background-color: #0056b3; */
+
+}
+
+.tableAV a{
+    display: flex;
+    flex-direction: row;
+}
+
+.TableAdmVer table{
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%; 
+    color: black;
+    font-size: 14px;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+
+.TableAdmVer thead {
+    background-color: rgba(255, 255, 255, 0.512);
+}
+    
+.TableAdmVer th {
+    text-align: left;
+    padding: 20px 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+    
+.TableAdmVer td {
+    padding: 15px;
+    border: solid 1px gray ;
+    white-space: nowrap;
+}
+    
+.table tbody tr:hover {
+    background-color: rgb(160, 160, 160);
+}
+
+.tableAV a{
+    margin: 5px;
+    display: inline-flex;
+    padding: 10px;
+    text-decoration: none; 
+    background-color: rgb(204, 89, 89); 
+    border: 1px solid #ddd; 
+    border-radius: 15px;
+}
+
+.tableAV a:hover{
+    scale: 1.1;
+    background-color: #c91010;
+}
+
+.delete-cont{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.TableAdmVer a{
+    margin: 5px;
+    height: 20px;
+    display: inline-flex;
+    padding: 10px; /* Añade padding para mejorar la apariencia */
+    text-decoration: none; /* Elimina el subrayado de los enlaces */
+    color: #ffffff; /* Cambia el color del texto del enlace */
+    background-color: rgb(204, 89, 89); /* Cambia el color de fondo */
+    border: 1px solid #ddd; /* Añade un borde para mejorar la visibilidad */
+    border-radius: 15px;
+}
+
+.TableAdmVer a:hover{
+    scale: 1.1;
+    background-color: #c91010;
+}
+
+#TableAdmVer2{
+    display: inline-block;
+    text-align: center;
+    
+}
+
+.fecha{
+    font-size: 10px;
+}
+
+.login_sec_btn_cont{
+    display: flex;
+    flex-direction: row;
+}
+
+.login_sec_btn_cont a{
+    margin-top: 17px;
+    margin-left: 9px;
+}
+
+.ver_mas{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.ver_mas a{
+    margin-top: 8px;
+    text-decoration: none;
+    color: #1E0304;
+    font-size: 25px;
+    font-weight: bolder;
+}
+
+#back{
+    text-decoration: underline;
+    color: #007bff;
+}
+
+.categorias {
+    background-color: rgb(255, 255, 255);
+    position: sticky;
+    top: 0;
+    height: 59px;
+    z-index: 10;
+    display: flex;
+}
+
+
+.categorias img {
+    margin-top: 5px;
+    width: 25px;
+    height: 20px;
+}
+.categorias img:hover{
+    scale: 1.1;
+}
+
+.categorias ul {
+    margin-top: 2px;
+    list-style: none;
+    display: inline-flex;
+}
+.categorias li {
+    display: inline-flex;
+}
+.categorias ul li a{
+    font-size: 13px;
+    font-weight: 400;
+    margin-inline-end: 10px;
+    margin-inline-start: 10px;
+    text-decoration: none;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    color: black;
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+
+}
+
+.categorias ul li a:hover{
+    color: rgb(219, 77, 77);
+    scale: 1.1;
+}
+.categorias .box {
+    margin-left: 20px;
+    margin-top: 6px;
+    display: inline-flex;
+    padding: 10px;
+    height: 40px;
+}
+.categorias > .box > * {
+    transition: all 0.5s ease-in-out;
+}
+.categorias > .box > ul > li > a{
+    transition: all 0.25s ease-in-out;
+}
+
+#mensaje {
+    display: none;
+    position: absolute;
+    width: 100%;
+    right: 0;
+    top:55px;
+    /* margin-top: 10px; */
+    /* padding: 10px; */
+    background-color: rgb(255, 255, 255);
+    color: white;
+    font-size: 18px;
+    white-space: nowrap; /* Evita que el texto se rompa en varias líneas */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Asegura que el mensaje esté por encima de otros elementos */
+    border-bottom: solid 1px gray;
+
+    transition: all .5s ease-in-out;
+    height: 1px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    display: flex;
+}
+#mensaje > div{
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+}
+#mensaje > div > li > h1{
+    width: 100%;
+    font-size: 24px;
+    color:#1E0304;
+    margin-bottom: 16px;
+    border-bottom:solid 2px #dc3545 ;
+}
+.box input {
+    display: none;
+}
+
+/* Mostrar el mensaje cuando el checkbox está marcado */
+#toggle:checked + #menu-label #mensaje {
+    transition: all .5s ease-in-out;
+    height: 260px;
+}
+#toggle{
+    transition: all .5s ease-in-out;
+    rotate: 0deg;
+}
+#toggle:checked{
+    rotate: 90deg;
+}
+#menu-label{
+    top: 97%;
+}
+
+/* productos y filtros  */
+
+
+.filtrosCont {
+
+    padding: 10px;
+    margin: 20px;
+    width: 200px;
+    height: 95%;
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.filtrosCont h1{
+    font-size: 30px;       
+}
+
+.range-values{
+    display: flex;
+}
+.search-bar input {
+    height: 35px;
+    width: 150px;
+    background-color: rgb(231, 231, 231);
+
+}
+
+.search-bar {
+    padding: 20px;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid black;
+    gap: 6px; 
+
+}
+
+.checkbox-menu{
+    padding: 20px;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid black;
+    gap: 6px;
+}
+
+.range-container{
+    padding: 20px;
+    height: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid black;
+    gap: 6px;
+}
+
+.filtroText{
+    padding: 20px;
+    height: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid black;
+    gap: 6px;
+}
+
+.productosCont {
+    width: 200px; /* Ajusta el ancho de las tarjetas */
+    height: 300px;
+    background-color: rgb(255, 255, 255); /* Color de fondo para visibilidad */
+    border-radius: 5px;      /* Bordes redondeados */
+    padding: 15px;
+    display: inline-block; /* Asegura que las tarjetas estén en una línea horizontal */
+    flex-direction: row;
+    justify-content: space-between;
+    color: black; /* Color del texto */
+    vertical-align: top;    /* Alinea las tarjetas en la parte superior */
+    border: 2px solid rgb(180, 180, 180) ;
+    box-shadow: 0 5px 8px rgb(110, 110, 110);
+}
+
+
+
+.cards {
+    width: 200px; /* Ajusta el ancho de las tarjetas */
+    height: 300px;
+    background-color: rgb(255, 255, 255); /* Color de fondo para visibilidad */
+    border-radius: 5px;      /* Bordes redondeados */
+    padding: 15px;
+    display: inline-block; /* Asegura que las tarjetas estén en una línea horizontal */
+    flex-direction: column;
+    justify-content: space-between;
+    color: black; /* Color del texto */
+    vertical-align: top;    /* Alinea las tarjetas en la parte superior */
+    border: 2px solid rgb(180, 180, 180) ;
+    box-shadow: 0 5px 8px rgb(110, 110, 110);
+}
+
+/* .card_conte:hover {
+    display: flex;
+    transform: translateY(-0px) scale(1.05);
+    position: relative;
+} */
+
+
+
+dialog {
+    width: 80%; /* Ajusta el tamaño según sea necesario */
+    max-width: 500px; /* Tamaño máximo del diálogo */
+    border: none;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    display: block; /* Mostrar el diálogo */
+}
+
+/* Estilo para el botón de cerrar */
+dialog a {
+    display: block;
+    text-align: right;
+    color: #333;
+    text-decoration: none;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+/* Estilo para el formulario dentro del diálogo */
+dialog  {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Espaciado y estilo para los inputs */
+dialog input[type="submit"] {
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+dialog input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+#delete_dialog {
+    width: 80%;
+    max-width: 600px;
+    max-height: 80vh; /* Limitar la altura del diálogo */
+    padding: 20px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    overflow: hidden; /* Ocultar el contenido que se desborda */
+}
+
+.dialog-content {
+    max-height: 100%; /* Asegurar que el contenido no se desborde del diálogo */
+    overflow-y: auto; /* Habilitar el desplazamiento vertical */
+    position: relative;
+    padding: 20px;
+}
+
+.dialog-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 18px;
+    text-decoration: none;
+    color: #333;
+    background: #f8f8f8;
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.dialog-close:hover {
+    color: #f00;
+    background: #e0e0e0;
+}
+
+h2 {
+    margin-top: 0;
+}
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.dialog-submit {
+    align-self: flex-end;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.dialog-submit:hover {
+    background-color: #0056b3;
+}
+.popup{
+    z-index:90000;
+}
+.popup_cont{
+    z-index:90000;
+}
+.elim_peedido_btn_cont{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.elim_peedido_btn{
+    font-size: 48px;
+    font-weight: bold;
+    font-family: "Inter", sans-serif;
+    background-color: rgb(219, 77, 77);
+    border: none;
+    border-radius: 16px;
+    padding: 16px;
+    margin: 16px;
+}
+
+@media (max-width:900px) {
+    #text_logo{
+        height: 75px;
+        width: 200px;
+    }
+}
+
+@media (max-width:1040px) {
+    .registro_login{
+        display:flex;
+        flex-direction: column;
+        gap:10px;
+    }
+    #text_logo_cont{
+        display:none;
+    }
+    .box{
+        display: flex;
+        width: calc(100% - 64px);
+    }
+    #menu_label{
+        width: 64px;
+    }
+    .box > ul {
+        overflow-x: scroll;
+        overflow-y: hidden;
+    }
+    header{
+        overflow: visible;
+    }
+    
+    header > .buscador{
+        top: 200px;
+        z-index: 2;
+    }
+    header:hover > .buscador  {
+        width: 90%;
+    }
+    header:hover > .buscador >form > input {
+        width: calc(90vw - 25px);
+    }
+    .card_v{
+        display: flex;
+        flex-direction: column;
+    }
+    .card_v > div{
+        display: flex;
+        flex-direction: column;
+    }
+    .card_v > div > h2{
+        text-align: center;
+}
+
+
+@media (max-width:1060px) {
+    .account_btn_cont{
+        display:flex;
+        flex-wrap: wrap;
+    }
+    .account_btn_cont > div{
+        width: 100%;
+        display:flex;
+        flex-wrap: wrap;
+    }
+    .account_btn_cont > div > a{
+        width: calc(50% - 40px);
+        text-align: center;
+    }
+    .account_btn_cont > a{
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width:600px) {
+    .account_btn_cont > div > a{
+        width: 100%;
+    }
+}
+/* carrito resp */
+
+
+@media (max-width:1060px) {
+    .carrito-container{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    .table-container{
+        margin: 0;
+        overflow-x: scroll;
+    }
+    .table-container > .table{
+        width: 100%;
+}
+@media (max-width:600px) {
+    .table-container > .table{
+        width: 200%;
+    }
 }

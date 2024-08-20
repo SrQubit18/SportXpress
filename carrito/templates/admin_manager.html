@@ -1,44 +1,59 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-    <title>Document</title>
-</head>
+
+{% block content %}
+
+
+{% if user.is_superuser %}
+
 <body>
-    <h1>admin manager</h1>
-    <a href="{% url 'add_dialog' %}">add product</a>
-    <table>
-        <tr>    
-            <th class="table_title"> id </th>
-            <th class="table_title"> nombre </th>
-            <th class="table_title"> precio </th>
-            <th class="table_title"> descripcion </th>
-            <th class="table_title"> stock </th>
-            <th class="table_title"> categoria </th>
-            <th class="table_title"> marca </th>
-            <th class="table_title"> tamaño </th>
-            <th class="table_title"> genero </th>
-        </tr>
-        {% for prod in prod_list %}
-            <tr>    
-                <th> {{ prod.id }}</th>
-                <th> {{ prod.nombre }}</th>
-                <th> {{ prod.precio }}</th>
-                <th> {{ prod.descripcion }}</th>
-                <th> {{ prod.stock }}</th>
-                <th> {{ prod.categoria }}</th>
-                <th> {{ prod.marca }}</th>
-                <th> {{ prod.tamaño }}</th>
-                <th> {{ prod.genero }}</th>
-                <th> <a href="{% url 'edit_dialog' prod.id %}">edit</a> </th>
-                <th> <a href="{% url 'delete_dialog' prod.id %}">delete</a> </th>
-            </tr>
-        {% endfor %}
-    </table>
+    <div class="TableAdmVer-container">
+        <div  class="TableAdmText"><h1>ADMIN MANAGER</h1></div>
+        <div class="TableAdmVer" id="TableAdmVer1">
+            <div class="tableAV">
+                <table>
+                    <tr>    
+                        <th class="table_title"> id </th>
+                        <th class="table_title"> nombre </th>
+                        <th class="table_title"> precio </th>
+                        <th class="table_title"> descripcion </th>
+                        <th class="table_title"> stock </th>
+                        <th class="table_title"> categoria </th>
+                        <th class="table_title"> marca </th>
+                        <th class="table_title"> tamaño </th>
+                        <th class="table_title"> genero </th>
+                    </tr>
+                    {% for prod in prod_list %}
+                        <tr>
+                               
+                            <th> {{ prod.id }}</th>
+                            <th> {{ prod.nombre|truncatechars:10 }} 
+
+                            </th>
+                            <th> {{ prod.precio }}</th>
+                            <th> {{ prod.descripcion|truncatechars:8 }}</th>
+                            <th> {{ prod.stock }}</th>
+                            <th> {{ prod.categoria }}</th>
+                            <th> {{ prod.marca }}</th>
+                            <th> {{ prod.tamaño }}</th>
+                            <th> {{ prod.genero }}</th>
+                            <th> <a href="{% url 'edit_dialog' prod.id %}">Editar</a> </th>
+                            <th> <a href="{% url 'delete_dialog' prod.id %}">Borrar</a> </th>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <a href="{% url 'account' %}">Atrás</a>
+            <a href="{% url 'add_dialog' %}">Añadir producto</a>
+        </div>
+    </div>
     {% block dialog %}
+
     {% endblock %}
 </body>
-</html>
+{% else %}
+<div class="carrito_nofound">
+    <h1>Solo los administradores purden ver esto</h1>
+</div>
+{% endif %}
+{% endblock %}

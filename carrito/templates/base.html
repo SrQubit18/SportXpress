@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,35 +23,24 @@
             </div>
         </div>
         <div></div>
-        <div class="buscador">
-            <form class="d-flex" role="search" method="POST" action="{% url 'buscar' %}">
-                {% csrf_token %}
-                <input
-                   class="form-control me-2"
-                   type="search"
-                   placeholder="Buscar"
-                   name="search_query"
-                   required aria-label="Buscar"
-                >
-                <button type="submit">
-                    <img src="{% static 'busqueda.png' %}" alt="">
-                </button>
-            </form>
-        </div>
+        {% block busca %}
+        {% endblock %}
         <div class="menu">
             {% if user.is_authenticated %}
                 <div class="cuenta">
-                    <h4><a href="{% url 'account' %}" class="f_invert"><img src="{% static 'cuenta.png' %}" alt=""></a></h4>
+                    <h4><a href="{% url 'account' %}" ><img src="{% static 'cuenta.png' %}" ></a></h4>
                     <h4>{{ user.username }}</h4>
                 </div>
             {% else %}
+            <div class="registro_login">
                 <h4><a href="{% url 'register' %}">REGISTRO</a></h4>
                 <H4><a href="{% url 'login' %}">LOGIN</a></H4>
+            </div>
             {% endif %}
 
-                <a class="cart_counter" href="{% url 'carrito' %}">
-                    <span id="cart-count">0</span>
-                </a>
+                <!-- <a class="cart_counter" href="{% url 'carrito' %}">
+                     <span id="cart-count">0</span> 
+                -->
                 <a href="{% url 'carrito' %}">
                     <img src="{% static 'carrito.svg' %}" alt="">
                 </a>
@@ -61,14 +51,63 @@
     <!-- CATEGORIAS Y FILTROS DE BUSQUEDA -->
     <div class="categorias">
         <div class="box">
-            <a href=""><img src="{% static 'menu.png' %}" alt=""></a>
+            <input type="checkbox" id="toggle">
+
+            <!-- Label que contiene el ícono del menú y el mensaje -->
+            <label id="menu-label" for="toggle">
+                <!-- Ícono del menú (visible siempre) -->
+                <img src="{% static 'menu.png' %}" alt="Menú" width="30" height="30">
+
+                 <!-- Mensaje que se mostrará cuando el checkbox esté marcado -->
+                <div class="menuHlist">
+                    <ul  id="mensaje">
+                        <div>
+                            <li><h1>Ropa</h1></li>
+                            <li><a href="{% url 'buscar_categoria' 'Remeras'  %}">Remeras</a></li>
+                            <li><a href="{% url 'buscar_categoria' 'Pantalones'  %}">Pantalones</a></li>
+                            <li><a href="{% url 'buscar_categoria' 'Chalecos'  %}">Chalecos</a></li>
+                            <li><a href="{% url 'buscar_categoria' 'Calcetines'  %}">Calcetines</a></li>
+                            <li><a href="{% url 'buscar_categoria' 'Pantalones cortos'  %}">Pantalones cortos</a></li>
+                        </div>
+                        <div>
+                            <li><h1>Accesorios</h1></li>
+                            <li><a href="{% url 'buscar_categoria' 'Gorras'  %}">Gorras</a></li>
+                            <li><a href="{% url 'buscar_categoria' 'Guantes'  %}">Guantes</a></li>
+                            <li><a href="{% url 'buscar_categoria' 'Cinturones'  %}">Cinturones</a></li>
+                        </div>
+                        <div>
+                            <li><h1>Equipamiento</h1></li>
+                            <li><a href="{% url 'buscar_categoria' 'Bandas elásticas'  %}">Bandas elásticas</a></li>
+                            <li><a href="{% url 'buscar_categoria' 'Pelotas'  %}">Pelotas</a></li>
+                            <li><a href="{% url 'buscar_categoria' 'Kit entrenamiento'  %}">Kit entrenamiento</a></li>
+                        </div>
+                        <div>
+                            <li><h1>Calzado</h1></li>
+                            <li><a href="{% url 'buscar_categoria' 'Calzado'  %}">Calzado</a></li>
+                            <li><a href="{% url 'buscar_categoria' 'Botines'  %}">Botines</a></li>
+                        </div>
+                        <div>
+                            <li><h1>Seguridad</h1></li>
+                            <li><a href="{% url 'buscar_categoria' 'Rodilleras'  %}">Rodilleras</a></li>
+                            <li><a href="{% url 'buscar_categoria' 'Hombreras'  %}">Hombreras</a></li>
+                            <li><a href="{% url 'buscar_categoria' 'Coderas'  %}">Coderas</a></li>
+                            <li><a href="{% url 'buscar_categoria' 'Cascos'  %}">Cascos</a></li>
+                        </div>
+                        <div>
+                            <li><h1>Otro</h1></li>
+                            <li><a href="{% url 'buscar_categoria' 'Mochilas'  %}">Mochilas</a></li>
+                            <li><a href="{% url 'buscar_categoria' 'Toallas'  %}">Toallas</a></li>
+                            <li><a href="{% url 'buscar_categoria' 'otro'  %}">otro</a></li>
+                        </div>
+                    </ul>
+                </div>
+            </label> 
     
             <ul>
                 <li><a href="">CATEGORIAS</a></li>
-                <li><a href="">ZAPATILLAS</a></li>
-                <li><a href="">ROPA</a></li>
-                <li><a href="">ACCESORIOS</a></li>
-                <li><a href="">MARCAS</a></li>
+                <li><a href="{% url 'buscar_categoria' 'Ropa'  %}">ROPA</a></li>
+                <li><a href="{% url 'buscar_categoria' 'Accesorios'  %}">ACCESORIOS</a></li>
+                <li><a href="{% url 'buscar_categoria' 'Calzado'  %}">CALZADO</a></li>
             </ul>
         </div>
     </div>
@@ -79,31 +118,31 @@
         <div class="footer-container">
             <div class="row">
                 <div class="footer-col">
-                    <h4>COMPANY</h4>
+                    <h4>EMPRESA</h4>
                     <ul>
-                        <li><a href="# ">ABOUT US</a></li>
-                        <li><a href="# ">OUR SERVICES</a></li>
-                        <li><a href="# ">PRIVACY POLICY</a></li>
-                        <li><a href="# ">AFFILIATE PROGRAM</a></li>
+                        <li><a href="# ">QUIÉNES SOMO</a></li>
+                        <li><a href="# ">SERVICIOS</a></li>
+                        <li><a href="# ">PRIVACIDAD</a></li>
+                        <li><a href="# ">AFILIADOS</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h4>GET HELP</h4>
+                    <h4>OBTENER AYUDA</h4>
                     <ul>
-                        <li><a href="# ">FAQ</a></li>
-                        <li><a href="# ">SHIPPING</a></li>
-                        <li><a href="# ">RETURNS</a></li>
-                        <li><a href="# ">ORDER STATUS</a></li>
-                        <li><a href="# ">PAYMENT OPTIONS</a></li>
+                        <li><a href="# ">PREGUNTAS FRECUENTES</a></li>
+                        <li><a href="# ">ENVÍOS</a></li>
+                        <li><a href="# ">DEVOLUCIONES</a></li>
+                        <li><a href="# ">ESTADO DEL PEDIDO</a></li>
+                        <li><a href="# ">OPCIONES DE PAGO</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h4>ONLINEA SHOP</h4>
+                    <h4>TIENDA ONLINE</h4>
                     <ul>
-                        <li><a href="# ">WATCH</a></li>
-                        <li><a href="# ">BAG</a></li>
-                        <li><a href="# ">SHOES</a></li>
-                        <li><a href="# ">DRESS</a></li>
+                        <li><a href="# ">RELOJES</a></li>
+                        <li><a href="# ">VESTIDOS</a></li>
+                        <li><a href="# ">BOLSOS</a></li>
+                        <li><a href="# ">ZAPATOS</a></li>
                     </ul>
                 </div>
             </div>

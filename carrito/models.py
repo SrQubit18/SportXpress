@@ -27,15 +27,56 @@ class PedidoEntregado(models.Model):
     
 class Producto(models.Model):
     CATEGORIA_OPCIONES = [
-        ('Ropa', 'Ropa'),
+        ('Remeras', 'Remeras'),
+        ('Botines', 'Botines'),
         ('Calzado', 'Calzado'),
-        ('Accesorios', 'Accesorios'),
+        ('Pantalones', 'Pantalones'),
+        ('Rodilleras', 'Rodilleras'),
+        ('Hombreras','Hombreras'),
+        ('Coderas','Coderas'),
+        ('Cascos','Cascos'),
+        ('Chalecos', 'Chalecos'),
+        ('Gorras', 'Gorras'),
+        ('Guantes', 'Guantes'),
+        ('Mochilas', 'Mochilas'),
+        ('Toallas', 'Toallas'),
+        ('Cinturones', 'Cinturones'),
+        ('Bandas elásticas', 'Bandas elásticas'),
+        ('Calcetines', 'Calcetines'),
+        ('Pantalones cortos', 'Pantalones cortos'),
+        ('Pelotas', 'Pelotas'),
+        ('Kit entrenamiento', 'Kit entrenamiento'),
+        ('otro','otro')
     ]
 
     MARCA_OPCIONES = [
         ('Nike', 'Nike'),
         ('Adidas', 'Adidas'),
         ('Puma', 'Puma'),
+        ('Reebok', 'Reebok'),
+        ('Under Armour', 'Under Armour'),
+        ('New Balance', 'New Balance'),
+        ('Asics', 'Asics'),
+        ('Mizuno', 'Mizuno'),
+        ('Wilson', 'Wilson'),
+        ('Converse', 'Converse'),
+        ('Fila', 'Fila'),
+        ('Skechers', 'Skechers'),
+        ('Champion', 'Champion'),
+        ('Saucony', 'Saucony'),
+        ('Brooks', 'Brooks'),
+        ('Kappa', 'Kappa'),
+        ('Vans', 'Vans'),
+        ('Lotto', 'Lotto'),
+        ('Columbia', 'Columbia'),
+        ('Oakley', 'Oakley'),
+        ('Hummel', 'Hummel'),
+        ('Trekking', 'Trekking'),
+        ('Joma', 'Joma'),
+        ('Karhu', 'Karhu'),
+        ('Hoka One One', 'Hoka One One'),
+        ('Palladium', 'Palladium'),
+        ('otro','otro')
     ]
 
     TAMANO_OPCIONES = [

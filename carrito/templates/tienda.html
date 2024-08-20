@@ -5,8 +5,16 @@
 <head>
     <!-- Añadir cualquier metadato adicional o enlaces a estilos si es necesario -->
 </head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <body>
     {% block content %}
+    <div class="verificacion hide">
+        <span class="cofirmacion">¡Se añadió a su carrito!</span>
+        <span class="close_btn">
+            <span class="close" onclick="hideVerificationMessage()">x</span>
+        </span>
+    </div>
+    
     <main>
         <div class="container">
             <div class="slider">
@@ -35,7 +43,9 @@
                 </div>
             </div>
         </div>
-
+        <div class="ver_mas" >
+            <a href="{% url 'productos' %}">Ver Mas</a>
+        </div>
         <div class="title">
             <h1>Mas vendidos</h1>
         </div>
@@ -47,22 +57,35 @@
                         <!-- Enlace que llama a la función showProductDetails con el ID del producto -->
                         <a href="#" onclick="showProductDetails('{{ producto.id }}'); return false;">
                             <div class="imegen_producto">
-                                {% if producto.stock >= 1 %}
-                                <img src="{% static 'img_pro.svg' %}" alt="">
+                                {% if producto.categoria in ropa_cat %}
+                                    <img src="{% static 'svg_repo/tshirt-svgrepo-com.svg' %}" alt="">
+                                {% elif producto.categoria in accesorios_cat %}
+                                    <img src="{% static 'svg_repo/snorkel-svgrepo-com.svg' %}" alt="">
+                                {% elif producto.categoria in calzado_cat %}
+                                    <img src="{% static 'svg_repo/shoe-6-svgrepo-com.svg' %}" alt="">
+                                {% elif producto.categoria in seguridad_cat %}
+                                    <img src="{% static 'svg_repo/security-protection-shield-svgrepo-com.svg' %}" alt="">
+                                {% elif producto.categoria in equipo_cat %}
+                                    <img src="{% static 'svg_repo/barbell-svgrepo-com.svg' %}" alt="">
+                                {% elif producto.categoria in otros_cat %}
+                                    <img src="{% static 'svg_repo/package-svgrepo-com.svg' %}" alt="">
                                 {% endif %}
                             </div>
                             <div class="info_cont">
-                                <h2 class="titulo_pro"><p>{{ producto.nombre|truncatechars:18 }}</p></h2>
+                                <h2 class="titulo_pro"><p>{{ producto.nombre|truncatechars:11 }}</p></h2>
                         </a>
                                 <div class="info">
                                     <p>{{ producto.descripcion|truncatechars:18 }}</p>
                                     <p class="precio"><strong>${{ producto.precio }} USD</strong></p>
-                                    
                                 </div>
                             </div>
                         
                         <div class="boton_comprar">
-                            <a href="#" class="add-to-cart" onclick="addToCart('{{ producto.id }}'); return false;">Añadir al carrito</a>
+                            {% if producto.stock > 0 %}
+                                <a href="#" class="add-to-cart" onclick="addToCart('{{ producto.id }}'); return false;">Añadir al carrito</a>
+                            {% else %}    
+                                <a href="#" class="add-to-cart" style="color: red;">sin stock </a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -70,7 +93,7 @@
             </div>
         </div>
 
-        <div class="title2">
+        <div class="title">
             <h1>Lo último</h1>
         </div>
         <div class="content_sliderP">
@@ -81,12 +104,22 @@
                         <!-- Enlace que llama a la función showProductDetails con el ID del producto -->
                         <a href="#" onclick="showProductDetails('{{ producto.id }}'); return false;">
                             <div class="imegen_producto">
-                                {% if producto.stock >= 1 %}
-                                <img src="{% static 'img_pro.svg' %}" alt="">
+                                {% if producto.categoria in ropa_cat %}
+                                    <img src="{% static 'svg_repo/tshirt-svgrepo-com.svg' %}" alt="">
+                                {% elif producto.categoria in accesorios_cat %}
+                                    <img src="{% static 'svg_repo/snorkel-svgrepo-com.svg' %}" alt="">
+                                {% elif producto.categoria in calzado_cat %}
+                                    <img src="{% static 'svg_repo/shoe-6-svgrepo-com.svg' %}" alt="">
+                                {% elif producto.categoria in seguridad_cat %}
+                                    <img src="{% static 'svg_repo/security-protection-shield-svgrepo-com.svg' %}" alt="">
+                                {% elif producto.categoria in equipo_cat %}
+                                    <img src="{% static 'svg_repo/barbell-svgrepo-com.svg' %}" alt="">
+                                {% elif producto.categoria in otros_cat %}
+                                    <img src="{% static 'svg_repo/package-svgrepo-com.svg' %}" alt="">
                                 {% endif %}
                             </div>
                             <div class="info_cont">
-                                <h2 class="titulo_pro"><p>{{ producto.nombre|truncatechars:18 }}</p></h2>
+                                <h2 class="titulo_pro"><p>{{ producto.nombre|truncatechars:11 }}</p></h2>
                         </a>
                                 <div class="info">
                                     <p>{{ producto.descripcion|truncatechars:18 }}</p>
@@ -96,7 +129,11 @@
                             </div>
                         
                         <div class="boton_comprar">
-                            <a href="#" class="add-to-cart" onclick="addToCart('{{ producto.id }}'); return false;">Añadir al carrito</a>
+                            {% if producto.stock > 0 %}
+                                <a href="#" class="add-to-cart" onclick="addToCart('{{ producto.id }}'); return false;">Añadir al carrito</a>
+                            {% else %}    
+                                <a href="#" class="add-to-cart" style="color: red;">sin stock </a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -109,7 +146,19 @@
         <div id="product-popup-{{ producto.id }}" class="popup" style="display: none;">
             <div class="popup-content">
                 <span class="close" onclick="closePopup('{{ producto.id }}')">&times;</span>
-                <img class="popup-image" id="popup-product-image-{{ producto.id }}" src="{% static 'img_pro.svg' %}" alt="">
+                {% if producto.categoria in ropa_cat %}
+                    <img class="popup-image" id="popup-product-image-{{ producto.id }}"  src="{% static 'svg_repo/tshirt-svgrepo-com.svg' %}" alt="">
+                {% elif producto.categoria in accesorios_cat %}
+                    <img class="popup-image" id="popup-product-image-{{ producto.id }}"  src="{% static 'svg_repo/snorkel-svgrepo-com.svg' %}" alt="">
+                {% elif producto.categoria in calzado_cat %}
+                    <img class="popup-image" id="popup-product-image-{{ producto.id }}"  src="{% static 'svg_repo/shoe-6-svgrepo-com.svg' %}" alt="">
+                {% elif producto.categoria in seguridad_cat %}
+                    <img class="popup-image" id="popup-product-image-{{ producto.id }}"  src="{% static 'svg_repo/security-protection-shield-svgrepo-com.svg' %}" alt="">
+                {% elif producto.categoria in equipo_cat %}
+                    <img class="popup-image" id="popup-product-image-{{ producto.id }}"  src="{% static 'svg_repo/barbell-svgrepo-com.svg' %}" alt="">
+                {% elif producto.categoria in otros_cat %}
+                    <img class="popup-image" id="popup-product-image-{{ producto.id }}"  src="{% static 'svg_repo/package-svgrepo-com.svg' %}" alt="">
+                {% endif %}
                 <div class="popup-details">
                     <h2 class="popup-title" id="popup-product-name-{{ producto.id }}"></h2>
                     <div class="popup-details-description">
@@ -126,7 +175,11 @@
                         <button onclick="updateQuantityPopup('{{ producto.id }}', -1)">-</button>
                     </div>
                     <div class="boton_comprar2">
-                        <a href="#" class="add-to-cart" onclick="addToCartPopup('{{ producto.id }}'); return false;">Añadir al carrito</a>
+                        {% if producto.stock > 0 %}
+                            <a href="#" class="add-to-cart" onclick="addToCartPopup('{{ producto.id }}'); return false;">Añadir al carrito</a>
+                        {% else %}    
+                            <a href="#" class="add-to-cart" style="color: red;">sin stock </a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -136,7 +189,7 @@
 
     <script>
         const quantities = {};
-
+        showVerificationMessage()
         function updateQuantity(productId, change) {
             if (!quantities[productId]) {
                 quantities[productId] = 1;
@@ -163,23 +216,31 @@
 
         var ids = [];
         function addToCart(productId, quantity) {
-            quantity = quantity || 1; // Si la cantidad no se pasa, usar 1 como valor predeterminado
-            
+            showVerificationMessage()
+            quantity = quantity || 1; // Usar 1 como valor predeterminado si no se pasa cantidad
+        
             fetch("{% url 'agregar_carrito' 0 %}".replace('0', productId) + '?cantidad=' + quantity, {
                 method: 'GET'
             })
             .then(response => response.json())
             .then(data => {
                 if (ids.includes(productId)) {
-                    console.log("error: product is already in list");
+                    console.log("Error: El producto ya está en la lista");
                 } else {
-                    document.getElementById('cart-count').innerText = Number(document.getElementById('cart-count').innerText) + 1;
+                    // Actualizar contador del carrito
+                    const cartCountElement = document.getElementById('cart-count');
+                    cartCountElement.innerText = Number(cartCountElement.innerText) + 1;
+        
+                    // Añadir producto a la lista de IDs en el carrito
                     ids.push(productId);
-                    sessionStorage.setItem("carrito_counter", document.getElementById('cart-count').innerText);
+                    sessionStorage.setItem("carrito_counter", cartCountElement.innerText);
+        
+                    // Mostrar el mensaje emergente de verificación
                 }
             })
-            .catch(error => console.error('Error adding to cart:', error));
+            .catch(error => console.error('Error añadiendo al carrito:', error));
         }
+        
 
         function showProductDetails(productId) {
             fetch(`/product-details/${productId}`)
@@ -216,35 +277,53 @@
         }
     </script>
     <script>
-        function showToast() {
-            const toast = document.getElementById('toast');
-            toast.className = 'toast show'; // Agregar clase para mostrar
-            setTimeout(() => {
-                toast.className = toast.className.replace('show', ''); // Ocultar después de 3 segundos
-            }, 3000); // Ajusta el tiempo según tus necesidades
-        }
-        
-        function addToCart(productId, quantity) {
-            quantity = quantity || 1; // Si la cantidad no se pasa, usar 1 como valor predeterminado
+        var ids = [];
+        let toastTimeout;
+
+        function showVerificationMessage() {
+            const verificationElement = document.querySelector('.verificacion');
             
-            fetch("{% url 'agregar_carrito' 0 %}".replace('0', productId) + '?cantidad=' + quantity, {
-                method: 'GET'
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (ids.includes(productId)) {
-                    console.log("error: product is already in list");
-                } else {
-                    document.getElementById('cart-count').innerText = Number(document.getElementById('cart-count').innerText) + 1;
-                    ids.push(productId);
-                    sessionStorage.setItem("carrito_counter", document.getElementById('cart-count').innerText);
-                    showToast(); // Mostrar mensaje emergente
-                }
-            })
-            .catch(error => console.error('Error adding to cart:', error));
+            // Si ya existe un timeout activo, cancelarlo
+            if (toastTimeout) {
+                clearTimeout(toastTimeout);
+            }
+
+            // Mostrar el mensaje con animación
+            verificationElement.classList.remove('hide');
+            verificationElement.classList.add('show');
+
+            // Ocultar el mensaje después de 3 segundos
+            toastTimeout = setTimeout(() => {
+                verificationElement.classList.remove('show');
+                verificationElement.classList.add('hide');
+            }, 3000);
         }
-        
+
+        function hideVerificationMessage() {
+            const verificationElement = document.querySelector('.verificacion');
+            verificationElement.classList.remove('show');
+            verificationElement.classList.add('hide');
+        }
+
     </script>
+    {% endblock %}
+
+    {% block busca %}
+    <div class="buscador">
+        <form class="d-flex" role="search" method="POST" action="{% url 'buscar' %}">
+            {% csrf_token %}
+            <input
+               class="form-control me-2"
+               type="search"
+               placeholder="Buscar"
+               name="search_query"
+               required aria-label="Buscar"
+            >
+            <button type="submit">
+                <img src="{% static 'busqueda.png' %}" >
+            </button>
+        </form>
+    </div>
     {% endblock %}
     <div id="toast" class="toast" style="display: none;">
         Se añadió al carrito

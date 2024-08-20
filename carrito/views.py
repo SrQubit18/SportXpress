@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import Producto, Factura,PedidoEntregado
 from .carrito_li import Carritos
-from .forms import add_form
+from .forms import add_form , change_name
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login , logout
 from django.contrib.auth.decorators import login_required
@@ -9,6 +9,27 @@ from django.http import JsonResponse
 from datetime import datetime
 from carrito.models import Venta,VentaProducto
 import uuid
+
+
+ropa_cat = ['Remeras','Pantalones','Chalecos','Calcetines','Pantalones cortos',]
+accesorios_cat = ['Gorras','Guantes','Cinturones',]
+equipo_cat = ['Bandas elásticas','Pelotas','Kit entrenamiento',]
+calzado_cat = ['Botines','Calzado']
+seguridad_cat = ['Rodilleras','Hombreras','Coderas','Cascos']
+otros_cat = ['Mochilas','Toallas','otro',]
+
+def history(request):
+    if request.user.is_authenticated:
+        historial=PedidoEntregado.objects.filter(usuario=request.user)
+        try:
+            change_username(request)
+            return render(request, 'account.html', {"historia":historial})
+
+        except:
+            return redirect("change_username_dialog")
+    else:
+        return render(request, 'account.html', {"historia":[]})
+
 
 def product_details(request, product_id):
     product = Producto.objects.get(id=product_id)
@@ -22,6 +43,20 @@ def product_details(request, product_id):
     }
     return JsonResponse(data)
 
+def search_by_cat(request,cat):
+    carrito=Carritos(request)
+    posts = Producto.objects.filter(categoria__contains=cat)
+    return render(request, 'search.html', {
+        'query':cat, 'posts':posts,"carrito":carrito,
+        'ropa_cat':ropa_cat,
+        'accesorios_cat':accesorios_cat,
+        'equipo_cat':equipo_cat,
+        'calzado_cat':calzado_cat,
+        'seguridad_cat':seguridad_cat,
+        'otros_cat':otros_cat,
+        })
+
+    
 def search(request):
     # Check if the request is a post request.
     carrito=Carritos(request)
@@ -30,7 +65,15 @@ def search(request):
         search_query = request.POST['search_query']
         # Filter your model by the search query
         posts = Producto.objects.filter(descripcion__contains=search_query)
-        return render(request, 'search.html', {'query':search_query, 'posts':posts,"carrito":carrito})
+        return render(request, 'search.html', {
+            'query':search_query, 'posts':posts,"carrito":carrito,
+            'ropa_cat':ropa_cat,
+            'accesorios_cat':accesorios_cat,
+            'equipo_cat':equipo_cat,
+            'calzado_cat':calzado_cat,
+            'seguridad_cat':seguridad_cat,
+            'otros_cat':otros_cat,
+            })
     else:
         return render(request, 'search.html',{})
 
@@ -120,6 +163,7 @@ def entregar_pedido(request, factura_id, total):
 
 def estado_cuenta_por_fecha(request):
     facturas = Factura.objects.filter(pendiente=True).order_by('fecha')
+    print([f.fecha for f in facturas])  # Debugging: imprime las fechas
     return render(request, 'facturacion.html', {'facturas': facturas})
 
 def anular_pedido(request, factura_id):
@@ -128,37 +172,16 @@ def anular_pedido(request, factura_id):
     return redirect('listar_facturas')
 
 def estado_cuenta_por_cliente(request):
-    facturas = Factura.objects.filter(pendiente=True).order_by('usuario__username')
+    facturas = Factura.objects.filter(pendiente=True).order_by('usuario')
+    print([f.usuario.username for f in facturas])  # Debugging: imprime los usuarios
     return render(request, 'facturacion.html', {'facturas': facturas})
 
 def listar_facturas(request):
     facturas_pendientes = Factura.objects.filter(pendiente=True, entregado=False)
     return render(request, 'facturacion.html', {'facturas': facturas_pendientes})
 
-# def procesar_compra(request):
-#         if request.method == 'POST':
-#             # Obtener el usuario actual
-#             usuario = request.user
-
-#             # Generar un número de factura único
-#             numero_factura = str(uuid.uuid4()).split('-')[0]
-
-#             # Obtener el total de la compra
-#             total_sum = sum(item['total'] for item in request.session['carrito'].values())
-
-#             # Crear la factura y guardarla en la base de datos
-#             factura = Factura.objects.create(
-#                 usuario=usuario,
-#                 numero_factura=numero_factura,
-#                 total=total_sum,
-#                 fecha=datetime.now()
-#             )
-
-#             # Limpiar el carrito después de la compra
-#             request.session['carrito'] = {}
-
-#             return redirect('compra_exitosa')  # Redirigir a una página de éxito
-#         return redirect('carrito')  # Redirigir al carrito si algo sale mal
+def index (request):
+    return redirect('tienda')
 
 def agregar_carrito(request, item_id):
     item = Producto.objects.get(id=item_id)
@@ -182,7 +205,27 @@ def limpiar_carrito(request):
 def tienda(request):
     carrito=Carritos(request)
     productos = Producto.objects.all()
-    return render(request, 'tienda.html', {'productos': productos, "carrito":carrito})
+    return render(request, 'tienda.html', {
+        'productos': productos, "carrito":carrito,
+        'ropa_cat':ropa_cat,
+        'accesorios_cat':accesorios_cat,
+        'equipo_cat':equipo_cat,
+        'calzado_cat':calzado_cat,
+        'seguridad_cat':seguridad_cat,
+        'otros_cat':otros_cat,
+        })
+
+def productos (request):
+    productos = Producto.objects.all()
+    return render(request, 'productos.html',{
+        'productos': productos,
+        'ropa_cat':ropa_cat,
+        'accesorios_cat':accesorios_cat,
+        'equipo_cat':equipo_cat,
+        'calzado_cat':calzado_cat,
+        'seguridad_cat':seguridad_cat,
+        'otros_cat':otros_cat,
+    })
 
 def restar(request, id):
     carrito = Carritos(request)
@@ -262,8 +305,6 @@ def register(request):
         form = UserCreationForm()
     return render(request, 'register.html', {'form': form})
 
-def account_manage(request):
-    return render(request, 'account.html')
 
 def admin_manager(request):
     prods = Producto.objects.all()
@@ -311,8 +352,20 @@ def dialgo_back(request):
 
 def logout_dialog(request):
     logout(request)
-    return render(request, 'logout_dialog.html')
+    return redirect('tienda')
+
+def change_username_popup(request):
+    historial=PedidoEntregado.objects.filter(usuario=request.user)
+    return render(request, 'rename_dialog.html', {"historia":historial})
 
 def payment(request):
     return render(request, 'payment.html')
+
+
+def change_username(request):
+    if request.method == 'POST':
+        if request.user:
+            request.user.username = request.POST.get('name','')
+            print(request.POST.get('name',''))
+            request.user.save()
 

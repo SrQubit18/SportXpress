@@ -6,3 +6,5 @@ class add_form(forms.ModelForm):
         model = Producto
         fields = ['nombre', 'precio', 'descripcion', 'stock', 'categoria', 'marca' , 'tamaño' , 'genero']
 
+class change_name(forms.Form):
+    name = forms.TextInput()

@@ -1,3 +1,88 @@
 <html>
-    <p>Gracias por tu compra</p>
+    <head>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                padding: 200px;
+                height: auto;
+                width: auto;
+                margin: auto;
+                background-color: #f4f4f9;
+                box-sizing: border-box;
+            }
+    
+            .product-container {
+                display: flex;
+                margin-top: 50%;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                height: 100%;
+                max-width: 800px;
+                margin: auto;
+                background: #ffffff;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+            }
+    
+            .products {
+                text-align: center;
+            }
+    
+            .img {
+                width: 80%;
+                max-width: 400px;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                margin-bottom: 20px;
+            }
+    
+            h1 {
+                font-size: 24px;
+                margin-bottom: 20px;
+                color: #333;
+            }
+    
+            p {
+                font-size: 18px;
+                color: #555;
+            }
+    
+            h2 {
+                font-size: 20px;
+                margin-top: 20px;
+                color: #000000;
+            }
+    
+            button {
+                padding: 15px 30px;
+                border-radius: 5px;
+                background-color: #007bff;
+                color: white;
+                border: none;
+                font-size: 16px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+    
+            button:hover {
+                background-color: #0056b3;
+            }
+    
+            .paypal-button-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        </style>
+    </head>
+    <div class="product-container">
+        <div class="products">
+            <p>Gracias por tu compra</p>
+            
+            <a href="{% url 'account' %}">ver compra</a>
+        </div>
+    </div>
 </html>

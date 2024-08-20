@@ -1,0 +1,271 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="verificacion hide">
+    <span class="cofirmacion">¡Se añadió a su carrito!</span>
+    <span class="close_btn">
+        <span class="close" onclick="hideVerificationMessage()">x</span>
+    </span>
+</div>
+<div class="containerP">
+    <div class="filtrosCont">
+        <div class="filtroText">
+            <h1>Filtros</h1>                                 
+        </div>
+
+        <div class="search-bar" >
+            <input type="search" placeholder="Buscar...">
+        </div>
+
+        <div class="range-container">
+            <div class="range-slider">
+                <input type="range" id="minPrice" min="0" max="10000" value="1000" step="100">
+            </div>
+            <div class="range-values">
+                <span id="minValue">10.000</span>
+                <span>.......</span>
+                <span id="maxValue">100.000</span>
+            </div>
+        </div>
+
+        <div class="checkbox-menu">
+            <p>Tamaño</p>
+            <label>
+                <input type="checkbox" name="option1" value="option1">
+                chico
+            </label>
+            <label>
+                <input type="checkbox" name="option2" value="option2">
+                mediano
+            </label>
+            <label>
+                <input type="checkbox" name="option3" value="option3">
+                grande
+            </label>
+            <label>
+                <input type="checkbox" name="option4" value="option4">
+                muy grande
+            </label>
+        </div>
+
+        <div class="checkbox-menu" >
+            <p>Género</p>
+            <label>
+                <input type="checkbox" name="option1" value="option1">
+                Mujer
+            </label>
+            <label>
+                <input type="checkbox" name="option2" value="option2">
+                Hombre
+            </label>
+            <label>
+                <input type="checkbox" name="option3" value="option3">
+                Unisex
+            </label>
+        </div>
+    </div>
+
+    <div class="productos-container">
+        {% for producto in productos %}
+        <div class="card_cont">
+            <div class="card">
+                <!-- Enlace que llama a la función showProductDetails con el ID del producto -->
+                <a href="#" onclick="showProductDetails('{{ producto.id }}'); return false;">
+                    <div class="imegen_producto">
+                        {% if producto.categoria in ropa_cat %}
+                            <img src="{% static 'svg_repo/tshirt-svgrepo-com.svg' %}" alt="">
+                        {% elif producto.categoria in accesorios_cat %}
+                            <img src="{% static 'svg_repo/snorkel-svgrepo-com.svg' %}" alt="">
+                        {% elif producto.categoria in calzado_cat %}
+                            <img src="{% static 'svg_repo/shoe-6-svgrepo-com.svg' %}" alt="">
+                        {% elif producto.categoria in seguridad_cat %}
+                            <img src="{% static 'svg_repo/security-protection-shield-svgrepo-com.svg' %}" alt="">
+                        {% elif producto.categoria in equipo_cat %}
+                            <img src="{% static 'svg_repo/barbell-svgrepo-com.svg' %}" alt="">
+                        {% elif producto.categoria in otros_cat %}
+                            <img src="{% static 'svg_repo/package-svgrepo-com.svg' %}" alt="">
+                        {% endif %}
+                    </div>
+                    <div class="info_cont">
+                        <h2 class="titulo_pro"><p>{{ producto.nombre|truncatechars:11 }}</p></h2>
+                </a>
+                        <div class="info">
+                            <p>{{ producto.descripcion|truncatechars:18 }}</p>
+                            <p class="precio"><strong>${{ producto.precio }} USD</strong></p>
+                        </div>
+                    </div>
+                
+                <div class="boton_comprar">
+                    <a href="#" class="add-to-cart" onclick="addToCart('{{ producto.id }}'); return false;">Añadir al carrito</a>
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% for producto in productos %}
+    <div id="product-popup-{{ producto.id }}" class="popup" style="display: none;">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup('{{ producto.id }}')">&times;</span>
+            {% if producto.categoria in ropa_cat %}
+                <img class="popup-image" id="popup-product-image-{{ producto.id }}"  src="{% static 'svg_repo/tshirt-svgrepo-com.svg' %}" alt="">
+            {% elif producto.categoria in accesorios_cat %}
+                <img class="popup-image" id="popup-product-image-{{ producto.id }}"  src="{% static 'svg_repo/snorkel-svgrepo-com.svg' %}" alt="">
+            {% elif producto.categoria in calzado_cat %}
+                <img class="popup-image" id="popup-product-image-{{ producto.id }}"  src="{% static 'svg_repo/shoe-6-svgrepo-com.svg' %}" alt="">
+            {% elif producto.categoria in seguridad_cat %}
+                <img class="popup-image" id="popup-product-image-{{ producto.id }}"  src="{% static 'svg_repo/security-protection-shield-svgrepo-com.svg' %}" alt="">
+            {% elif producto.categoria in equipo_cat %}
+                <img class="popup-image" id="popup-product-image-{{ producto.id }}"  src="{% static 'svg_repo/barbell-svgrepo-com.svg' %}" alt="">
+            {% elif producto.categoria in otros_cat %}
+                <img class="popup-image" id="popup-product-image-{{ producto.id }}"  src="{% static 'svg_repo/package-svgrepo-com.svg' %}" alt="">
+            {% endif %}
+            <div class="popup-details">
+                <h2 class="popup-title" id="popup-product-name-{{ producto.id }}"></h2>
+                <div class="popup-details-description">
+                    <p class="popup-category" id="popup-product-category-{{ producto.id }}"></p>
+                    <p class="popup-brand" id="popup-product-brand-{{ producto.id }}"></p>
+                </div>
+                <p class="popup-description" id="popup-product-description-{{ producto.id }}"></p>
+            </div>
+            <div class="popup-price-button">
+                <p class="precio_popup" id="popup-product-price-{{ producto.id }}"></p>
+                <div class="btn_add_rem">
+                    <button onclick="updateQuantityPopup('{{ producto.id }}', 1)">+</button>
+                    <span id="quantity-popup-{{ producto.id }}">1</span>
+                    <button onclick="updateQuantityPopup('{{ producto.id }}', -1)">-</button>
+                </div>
+                <div class="boton_comprar2">
+                    {% if producto.stock > 0 %}
+                        <a href="#" class="add-to-cart" onclick="addToCartPopup('{{ producto.id }}'); return false;">Añadir al carrito</a>
+                    {% else %}    
+                        <a href="#" class="add-to-cart" style="color: red;">sin stock </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+<script>
+    const quantities = {};
+    showVerificationMessage()
+    function updateQuantity(productId, change) {
+        if (!quantities[productId]) {
+            quantities[productId] = 1;
+        }
+        quantities[productId] += change;
+        if (quantities[productId] < 1) {
+            quantities[productId] = 1;
+        }
+    
+        document.getElementById(`quantity-${productId}`).innerText = quantities[productId];
+    }
+
+    function updateQuantityPopup(productId, change) {
+        if (!quantities[productId]) {
+            quantities[productId] = 1;
+        }
+        quantities[productId] += change;
+        if (quantities[productId] < 1) {
+            quantities[productId] = 1;
+        }
+    
+        document.getElementById(`quantity-popup-${productId}`).innerText = quantities[productId];
+    }
+
+    var ids = [];
+    function addToCart(productId, quantity) {
+        showVerificationMessage()
+        quantity = quantity || 1; // Usar 1 como valor predeterminado si no se pasa cantidad
+    
+        fetch("{% url 'agregar_carrito' 0 %}".replace('0', productId) + '?cantidad=' + quantity, {
+            method: 'GET'
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (ids.includes(productId)) {
+                console.log("Error: El producto ya está en la lista");
+            } else {
+                // Actualizar contador del carrito
+                const cartCountElement = document.getElementById('cart-count');
+                cartCountElement.innerText = Number(cartCountElement.innerText) + 1;
+    
+                // Añadir producto a la lista de IDs en el carrito
+                ids.push(productId);
+                sessionStorage.setItem("carrito_counter", cartCountElement.innerText);
+    
+                // Mostrar el mensaje emergente de verificación
+            }
+        })
+        .catch(error => console.error('Error añadiendo al carrito:', error));
+    }
+    
+
+    function showProductDetails(productId) {
+        fetch(`/product-details/${productId}`)
+            .then(response => response.json())
+            .then(product => {
+                openPopup(productId, product);
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    function openPopup(productId, product) {
+        document.getElementById(`popup-product-name-${productId}`).innerText = product.nombre;
+        document.getElementById(`popup-product-description-${productId}`).innerText = product.descripcion;
+        document.getElementById(`popup-product-price-${productId}`).innerText = `$${product.precio} USD`;
+        document.getElementById(`popup-product-category-${productId}`).innerText =  `${product.categoria}`;
+        document.getElementById(`popup-product-brand-${productId}`).innerText =  `${product.marca}`;
+    
+        // Asegúrate de que la cantidad del producto también se muestre en el popup
+        document.getElementById(`quantity-popup-${productId}`).innerText = quantities[productId] || 1;
+    
+        document.getElementById(`product-popup-${productId}`).style.display = 'block';
+    }
+
+    function closePopup(productId) {
+        document.getElementById(`product-popup-${productId}`).style.display = 'none';
+    }
+
+    function addToCartPopup(productId) {
+        if (productId) {
+            const quantity = quantities[productId] || 1;
+            addToCart(productId, quantity);
+            closePopup(productId);
+        }
+    }
+</script>
+<script>
+    var ids = [];
+    let toastTimeout;
+
+    function showVerificationMessage() {
+        const verificationElement = document.querySelector('.verificacion');
+        
+        // Si ya existe un timeout activo, cancelarlo
+        if (toastTimeout) {
+            clearTimeout(toastTimeout);
+        }
+
+        // Mostrar el mensaje con animación
+        verificationElement.classList.remove('hide');
+        verificationElement.classList.add('show');
+
+        // Ocultar el mensaje después de 3 segundos
+        toastTimeout = setTimeout(() => {
+            verificationElement.classList.remove('show');
+            verificationElement.classList.add('hide');
+        }, 3000);
+    }
+
+    function hideVerificationMessage() {
+        const verificationElement = document.querySelector('.verificacion');
+        verificationElement.classList.remove('show');
+        verificationElement.classList.add('hide');
+    }
+
+</script>
+
+{% endblock %}

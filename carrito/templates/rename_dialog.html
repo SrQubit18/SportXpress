@@ -1,0 +1,14 @@
+{% extends 'account.html'%}
+{% block r_dialog %}
+<dialog id="delete_dialog">
+    <div class="dialog-content">
+        <a href="{% url 'account' %}" class="dialog-close">X</a>
+        <h2>Ese nombre ya esta registrado</h2>
+        <h4>intenta con otro</h4>
+    </div>
+</dialog>
+<script>
+    var dialog = document.getElementById("delete_dialog");
+    dialog.showModal();
+</script>
+{% endblock %}
