@@ -2290,6 +2290,7 @@ h2 {
     }
     .card_v > div > h2{
         text-align: center;
+    }
 }
 
 
@@ -2333,6 +2334,7 @@ h2 {
     }
     .table-container > .table{
         width: 100%;
+    }
 }
 @media (max-width:600px) {
     .table-container > .table{
