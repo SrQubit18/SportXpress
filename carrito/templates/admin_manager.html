@@ -12,7 +12,7 @@
         <div class="TableAdmVer" id="TableAdmVer1">
             <div class="tableAV">
                 <table>
-                    <tr>    
+                    <tr>
                         <th class="table_title"> id </th>
                         <th class="table_title"> nombre </th>
                         <th class="table_title"> precio </th>
@@ -25,9 +25,9 @@
                     </tr>
                     {% for prod in prod_list %}
                         <tr>
-                               
+
                             <th> {{ prod.id }}</th>
-                            <th> {{ prod.nombre|truncatechars:10 }} 
+                            <th> {{ prod.nombre|truncatechars:10 }}
 
                             </th>
                             <th> {{ prod.precio }}</th>
@@ -53,7 +53,7 @@
 </body>
 {% else %}
 <div class="carrito_nofound">
-    <h1>Solo los administradores purden ver esto</h1>
+    <h1>Solo los administradores pueden ver esto</h1>
 </div>
 {% endif %}
 {% endblock %}

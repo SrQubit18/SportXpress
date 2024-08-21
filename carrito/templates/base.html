@@ -8,10 +8,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:wght@900&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Document</title>
+    <title>SportXpress</title>
     <link rel="stylesheet" href="{% static '/style.css' %}">
+    <link rel="icon" href="{% static '/icon.png' %}">
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"> -->
-    
+
 </head>
 <body>
     <!--EL MENU Y LA BARRA DE BUSQUEDA -->
@@ -29,7 +30,8 @@
             {% if user.is_authenticated %}
                 <div class="cuenta">
                     <h4><a href="{% url 'account' %}" ><img src="{% static 'cuenta.png' %}" ></a></h4>
-                    <h4>{{ user.username }}</h4>
+                    <h4 style="text-transform: none;" >{{ user.username }}</h4>
+
                 </div>
             {% else %}
             <div class="registro_login">
@@ -39,14 +41,14 @@
             {% endif %}
 
                 <!-- <a class="cart_counter" href="{% url 'carrito' %}">
-                     <span id="cart-count">0</span> 
+                     <span id="cart-count">0</span>
                 -->
                 <a href="{% url 'carrito' %}">
                     <img src="{% static 'carrito.svg' %}" alt="">
                 </a>
 
         </div>
-        
+
     </header>
     <!-- CATEGORIAS Y FILTROS DE BUSQUEDA -->
     <div class="categorias">
@@ -101,8 +103,8 @@
                         </div>
                     </ul>
                 </div>
-            </label> 
-    
+            </label>
+
             <ul>
                 <li><a href="">CATEGORIAS</a></li>
                 <li><a href="{% url 'buscar_categoria' 'Ropa'  %}">ROPA</a></li>
@@ -113,7 +115,7 @@
     </div>
     {% block content %}
     {% endblock %}
-    
+
     <footer class="footer">
         <div class="footer-container">
             <div class="row">
